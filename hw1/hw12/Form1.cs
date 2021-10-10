@@ -45,6 +45,7 @@ namespace hw12
 				{
 					conn.Close();
 					conn.Dispose();
+
 					studentGrid.DataSource = dt;
 				}
 			}
@@ -58,6 +59,17 @@ namespace hw12
 		{
 			UserForm user = new UserForm();
 			user.Show();
+		}
+
+		private void studentGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+			// I have access to all the values that are updated. I'll just create an object 
+			// of the user and run the update method (todo) from the user class
+			var data = (DataGridView)sender;
+			var values = data.Rows[e.RowIndex];
+			int ID = (int)values.Cells["ID"].Value;
+			//int FistName = 
+
 		}
 	}
 }

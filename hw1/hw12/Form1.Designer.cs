@@ -32,6 +32,7 @@ namespace hw12
 			this.importBtn = new System.Windows.Forms.Button();
 			this.studentGrid = new System.Windows.Forms.DataGridView();
 			this.addBtn = new System.Windows.Forms.Button();
+			this.updateBtn = new System.Windows.Forms.DataGridViewButtonColumn();
 			((System.ComponentModel.ISupportInitialize)(this.studentGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -48,20 +49,28 @@ namespace hw12
 			// studentGrid
 			// 
 			this.studentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.studentGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.updateBtn});
 			this.studentGrid.Location = new System.Drawing.Point(36, 67);
 			this.studentGrid.Name = "studentGrid";
 			this.studentGrid.Size = new System.Drawing.Size(715, 345);
 			this.studentGrid.TabIndex = 1;
+			this.studentGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studentGrid_CellContentClick);
 			// 
 			// addBtn
 			// 
-			this.addBtn.Location = new System.Drawing.Point(139, 23);
+			this.addBtn.Location = new System.Drawing.Point(130, 23);
 			this.addBtn.Name = "addBtn";
 			this.addBtn.Size = new System.Drawing.Size(75, 23);
 			this.addBtn.TabIndex = 2;
 			this.addBtn.Text = "Add";
 			this.addBtn.UseVisualStyleBackColor = true;
 			this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+			// 
+			// updateBtn
+			// 
+			this.updateBtn.HeaderText = "Update";
+			this.updateBtn.Name = "updateBtn";
 			// 
 			// Form1
 			// 
@@ -83,6 +92,7 @@ namespace hw12
 		private System.Windows.Forms.Button importBtn;
 		private System.Windows.Forms.DataGridView studentGrid;
 		private System.Windows.Forms.Button addBtn;
+		private System.Windows.Forms.DataGridViewButtonColumn updateBtn;
 	}
 }
 

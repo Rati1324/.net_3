@@ -8,14 +8,23 @@ namespace hw12
 {
 	public class User
 	{
-		public int ID { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string PersonalNumber { get; set; }
-		public DateTime? BirthDate { get; set; }
-		public int GenderID { get; set; }
-		public string PhoneNumber { get; set; }
-		public string EMail { get; set; }
-		public int RoleID { get; set; }
+		private int ID;
+		public string FirstName;
+		public string LastName;
+		private string PersonalNumber;
+		private DateTime? BirthDate;
+		private int GenderID;
+		private string PhoneNumber;
+		private string EMail;
+		private int RoleID;
+		
+		public User(int ID, string FirstName, string PersonalNumber, DateTime? BirthDate, 
+			int GenderID, string PhoneNumber, string EMail, int RoleID)
+		{
+			this.ID = ID; this.FirstName = FirstName; this.PersonalNumber = PersonalNumber;
+			this.BirthDate = BirthDate; this.GenderID = GenderID; this.PhoneNumber = PhoneNumber;
+			this.EMail = EMail; this.RoleID = RoleID;
+		}
+		
 	}
 }
