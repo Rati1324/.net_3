@@ -1,53 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace hw12
 {
-	public partial class User : Form
+	public class User
 	{
-		public User()
-		{
-			InitializeComponent();
-		}
-
-		private void User_Load(object sender, EventArgs e)
-		{
-			try
-			{
-				DataTable dtGender = GetData("SELECT ID, NameGe as 'NAME' FROM Gender");
-				genderInput.DataSource = dtGender;
-				genderInput.DisplayMember = "NAME";
-				genderInput.ValueMember = "ID";
-			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
-
-		DataTable GetData(string query)
-		{
-			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
-			{
-				using (SqlCommand com = new SqlCommand(query, conn))
-				{
-					conn.Open();
-					SqlDataReader sdr = com.ExecuteReader();
-					DataTable dt = new DataTable();
-					dt.Load(sdr);
-					return dt;
-				}		
-			}
-		}
+		public int ID { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string PersonalNumber { get; set; }
+		public DateTime? BirthDate { get; set; }
+		public int GenderID { get; set; }
+		public string PhoneNumber { get; set; }
+		public string EMail { get; set; }
+		public int RoleID { get; set; }
 	}
 }

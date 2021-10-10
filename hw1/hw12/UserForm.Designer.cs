@@ -1,7 +1,7 @@
 ﻿
 namespace hw12
 {
-	partial class User
+	partial class UserForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -48,6 +48,12 @@ namespace hw12
 			this.genderTableAdapter = new hw12.EduDBDataSetTableAdapters.GenderTableAdapter();
 			this.genderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.genderTableAdapter1 = new hw12.EduDBDataSet1TableAdapters.GenderTableAdapter();
+			this.roleInput = new System.Windows.Forms.ComboBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.phoneInput = new System.Windows.Forms.TextBox();
+			this.emailInput = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.eduDBDataSet1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.eduDBDataSet)).BeginInit();
@@ -149,12 +155,13 @@ namespace hw12
 			// 
 			// addBtn
 			// 
-			this.addBtn.Location = new System.Drawing.Point(242, 221);
+			this.addBtn.Location = new System.Drawing.Point(242, 319);
 			this.addBtn.Name = "addBtn";
 			this.addBtn.Size = new System.Drawing.Size(75, 23);
 			this.addBtn.TabIndex = 6;
 			this.addBtn.Text = "Add";
 			this.addBtn.UseVisualStyleBackColor = true;
+			this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
 			// 
 			// eduDBDataSet
 			// 
@@ -179,23 +186,79 @@ namespace hw12
 			// 
 			this.genderTableAdapter1.ClearBeforeFill = true;
 			// 
-			// User
+			// roleInput
+			// 
+			this.roleInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.roleInput.FormattingEnabled = true;
+			this.roleInput.Location = new System.Drawing.Point(117, 287);
+			this.roleInput.Name = "roleInput";
+			this.roleInput.Size = new System.Drawing.Size(200, 21);
+			this.roleInput.TabIndex = 5;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(47, 290);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(29, 13);
+			this.label6.TabIndex = 3;
+			this.label6.Text = "Role";
+			// 
+			// phoneInput
+			// 
+			this.phoneInput.Location = new System.Drawing.Point(117, 219);
+			this.phoneInput.Name = "phoneInput";
+			this.phoneInput.Size = new System.Drawing.Size(200, 20);
+			this.phoneInput.TabIndex = 2;
+			// 
+			// emailInput
+			// 
+			this.emailInput.Location = new System.Drawing.Point(117, 252);
+			this.emailInput.Name = "emailInput";
+			this.emailInput.Size = new System.Drawing.Size(200, 20);
+			this.emailInput.TabIndex = 2;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(47, 222);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(38, 13);
+			this.label7.TabIndex = 3;
+			this.label7.Text = "Phone";
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(47, 256);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(32, 13);
+			this.label8.TabIndex = 3;
+			this.label8.Text = "Email";
+			// 
+			// UserForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.addBtn);
+			this.Controls.Add(this.roleInput);
 			this.Controls.Add(this.genderInput);
 			this.Controls.Add(this.dobInput);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.label8);
+			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
+			this.Controls.Add(this.emailInput);
+			this.Controls.Add(this.phoneInput);
 			this.Controls.Add(this.idInput);
 			this.Controls.Add(this.l_nameInput);
 			this.Controls.Add(this.f_nameInput);
-			this.Name = "User";
+			this.Name = "UserForm";
 			this.Text = "Add new user";
 			this.Load += new System.EventHandler(this.User_Load);
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource2)).EndInit();
@@ -228,5 +291,11 @@ namespace hw12
 		private EduDBDataSet1 eduDBDataSet1;
 		private System.Windows.Forms.BindingSource genderBindingSource2;
 		private EduDBDataSet1TableAdapters.GenderTableAdapter genderTableAdapter1;
+		private System.Windows.Forms.ComboBox roleInput;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox phoneInput;
+		private System.Windows.Forms.TextBox emailInput;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label8;
 	}
 }

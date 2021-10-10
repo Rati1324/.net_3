@@ -56,7 +56,7 @@ namespace hw12
 
 		private void addBtn_Click(object sender, EventArgs e)
 		{
-			User user = new User();
+			UserForm user = new UserForm();
 			user.Show();
 		}
 	}
