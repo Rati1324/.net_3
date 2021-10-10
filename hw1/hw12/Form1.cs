@@ -30,6 +30,7 @@ namespace hw12
 				SqlDataReader sdr = null;
 
 				DataTable dt = new DataTable();
+				// WTF is this nested try - except??
 				try
 				{
 					conn.Open();
@@ -67,9 +68,18 @@ namespace hw12
 			// of the user and run the update method (todo) from the user class
 			var data = (DataGridView)sender;
 			var values = data.Rows[e.RowIndex];
-			int ID = (int)values.Cells["ID"].Value;
-			//int FistName = 
+			int id = (int)values.Cells["ID"].Value;
+			string FistName = (string)values.Cells["FisrtName"].Value;
+			string LastName = (string)values.Cells["LastName"].Value;
+			string personalNumber = (string)values.Cells["PersonalNumber"].Value;
+			DateTime? birthDate = (DateTime?)values.Cells["BirthDate"].Value;
+			int genderId = (int)values.Cells["GenderId"].Value;
+			string phoneNumber = (string)values.Cells["PhoneNumber"].Value;
+			string email = (string)values.Cells["EMail"].Value;
+			int roleId = (int)values.Cells["RoleId"].Value;
 
+			User u = new User(id, FistName, LastName, personalNumber, birthDate, genderId, phoneNumber, email, roleId);
+			
 		}
 	}
 }

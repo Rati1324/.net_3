@@ -39,39 +39,16 @@ namespace hw12
 			}
 		}
 
-		DataTable GetData(string query)
-		{
-			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
-			{
-				using (SqlCommand com = new SqlCommand(query, conn))
-				{
-					conn.Open();
-					SqlDataReader sdr = com.ExecuteReader();
-					DataTable dt = new DataTable();
-					dt.Load(sdr);
-					return dt;
-				}		
-			}
-		}
-
+		
 		private void addBtn_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				User user = new User();
-				user.FirstName = f_nameInput.Text;
-				user.LastName = l_nameInput.Text;
-				user.PersonalNumber = idInput.Text;
-				user.PhoneNumber = phoneInput.Text;
-				user.BirthDate = dobInput.Value.Date;
-				user.GenderID = (int)genderInput.SelectedValue;
-				user.EMail = emailInput.Text;
-				user.RoleID = (int)roleInput.SelectedValue;
+				User user = new User(idInput.Text, f_nameInput.Text, l_nameInput.Text, phoneInput.Text,
+					dobInput.Value.Date, (int)genderInput.SelectedValue, phoneInput.Text, emailInput.Text, 
+					(int)roleInput.SelectedValue);
 
-				string query = $"INSERT INTO Users VALUES(" +
-					$"'{user.FirstName}','{user.LastName}','{user.PersonalNumber}'," +
-					$"'{user.BirthDate.Value.ToString("dd.MM.yyyy")}',{user.GenderID},'{user.PhoneNumber}','{user.EMail}',{user.RoleID})";
-				MessageBox.Show(query);
+				// rewrite this to insert from inside the user object
 				using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
 				{
 					using (SqlCommand com = new SqlCommand(query, conn))
