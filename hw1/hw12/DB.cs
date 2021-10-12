@@ -11,9 +11,11 @@ namespace hw12
 {
 	public class DB
 	{
-		DataTable GetData(string query)
+
+		public DataTable GetData(string query)
+
 		{
-			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
+			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString);
 			{
 				using (SqlCommand com = new SqlCommand(query, conn))
 				{
@@ -22,7 +24,7 @@ namespace hw12
 					DataTable dt = new DataTable();
 					dt.Load(sdr);
 					return dt;
-				}		
+				}
 			}
 		}
 

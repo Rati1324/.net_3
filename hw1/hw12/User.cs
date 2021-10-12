@@ -25,7 +25,7 @@ namespace hw12
 			int genderID, string phoneNumber, string eMail, int roleID)
 		{
 			this.id = id; this.FirstName = FirstName; this.LastName = LastName;
-			this.personalNumber = personalNumber; this.birthDate = birthDate; 
+			this.personalNumber = personalNumber; this.birthDate = birthDate;
 			this.genderID = genderID; this.phoneNumber = phoneNumber;
 			this.eMail = eMail; this.roleID = roleID;
 		}
@@ -41,6 +41,28 @@ namespace hw12
 
 				throw;
 			}
+		}
+
+		public void insert()
+		{
+			string query = $"INSERT INTO Users VALUES({this.id}, '{this.LastName}', '{this.FirstName}', " +
+				$"'{this.birthDate.Value.ToString("dd.MM.yyyy")}', {this.genderID}, '{this.phoneNumber}', '{this.eMail}', {this.roleID})";
+			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
+			{
+				using (SqlCommand com = new SqlCommand(query, conn))
+				{
+					conn.Open();
+					try
+					{
+						com.ExecuteNonQuery();
+					}
+					catch (Exception ex)
+					{
+						throw new Exception($"error {ex}");
+					}
+				}
+			}
+
 		}
 	}
 }

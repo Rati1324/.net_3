@@ -23,12 +23,13 @@ namespace hw12
 		{
 			try
 			{
-				DataTable dtGender = GetData("SELECT ID, NameGe as 'NAME' FROM Gender");
+				DB db = new DB();
+				DataTable dtGender = db.GetData("SELECT ID, NameGe as 'NAME' FROM Gender");
 				genderInput.DataSource = dtGender;
 				genderInput.DisplayMember = "NAME";
 				genderInput.ValueMember = "ID";
 
-				DataTable dtRoles = GetData("SELECT ID, NameGe AS 'NAME' FROM Roles");
+				DataTable dtRoles = db.GetData("SELECT ID, NameGe AS 'NAME' FROM Roles");
 				roleInput.DataSource = dtRoles;
 				roleInput.DisplayMember = "NAME";
 				roleInput.ValueMember = "ID";
@@ -47,23 +48,7 @@ namespace hw12
 				User user = new User(idInput.Text, f_nameInput.Text, l_nameInput.Text, phoneInput.Text,
 					dobInput.Value.Date, (int)genderInput.SelectedValue, phoneInput.Text, emailInput.Text, 
 					(int)roleInput.SelectedValue);
-
-				// rewrite this to insert from inside the user object
-				using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
-				{
-					using (SqlCommand com = new SqlCommand(query, conn))
-					{
-						conn.Open();
-						try
-						{
-							com.ExecuteNonQuery();
-						}
-						catch (Exception ex)
-						{
-							throw new Exception($"error {ex}");
-						}
-					}
-				}
+				user.insert();
 			}
 
 			catch (Exception)

@@ -68,7 +68,7 @@ namespace hw12
 			// of the user and run the update method (todo) from the user class
 			var data = (DataGridView)sender;
 			var values = data.Rows[e.RowIndex];
-			int id = (int)values.Cells["ID"].Value;
+			string id = (string)values.Cells["ID"].Value;
 			string FistName = (string)values.Cells["FisrtName"].Value;
 			string LastName = (string)values.Cells["LastName"].Value;
 			string personalNumber = (string)values.Cells["PersonalNumber"].Value;

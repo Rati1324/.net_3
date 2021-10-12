@@ -41,13 +41,9 @@ namespace hw12
 			this.label5 = new System.Windows.Forms.Label();
 			this.genderInput = new System.Windows.Forms.ComboBox();
 			this.genderBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-			this.eduDBDataSet1 = new hw12.EduDBDataSet1();
 			this.addBtn = new System.Windows.Forms.Button();
-			this.eduDBDataSet = new hw12.EduDBDataSet();
 			this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.genderTableAdapter = new hw12.EduDBDataSetTableAdapters.GenderTableAdapter();
 			this.genderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-			this.genderTableAdapter1 = new hw12.EduDBDataSet1TableAdapters.GenderTableAdapter();
 			this.roleInput = new System.Windows.Forms.ComboBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.phoneInput = new System.Windows.Forms.TextBox();
@@ -55,8 +51,6 @@ namespace hw12
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.eduDBDataSet1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.eduDBDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource1)).BeginInit();
 			this.SuspendLayout();
@@ -146,12 +140,6 @@ namespace hw12
 			// genderBindingSource2
 			// 
 			this.genderBindingSource2.DataMember = "Gender";
-			this.genderBindingSource2.DataSource = this.eduDBDataSet1;
-			// 
-			// eduDBDataSet1
-			// 
-			this.eduDBDataSet1.DataSetName = "EduDBDataSet1";
-			this.eduDBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// addBtn
 			// 
@@ -165,26 +153,20 @@ namespace hw12
 			// 
 			// eduDBDataSet
 			// 
-			this.eduDBDataSet.DataSetName = "EduDBDataSet";
-			this.eduDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// genderBindingSource
 			// 
 			this.genderBindingSource.DataMember = "Gender";
-			this.genderBindingSource.DataSource = this.eduDBDataSet;
 			// 
 			// genderTableAdapter
 			// 
-			this.genderTableAdapter.ClearBeforeFill = true;
 			// 
 			// genderBindingSource1
 			// 
 			this.genderBindingSource1.DataMember = "Gender";
-			this.genderBindingSource1.DataSource = this.eduDBDataSet;
 			// 
 			// genderTableAdapter1
 			// 
-			this.genderTableAdapter1.ClearBeforeFill = true;
 			// 
 			// roleInput
 			// 
@@ -262,8 +244,6 @@ namespace hw12
 			this.Text = "Add new user";
 			this.Load += new System.EventHandler(this.User_Load);
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.eduDBDataSet1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.eduDBDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.genderBindingSource1)).EndInit();
 			this.ResumeLayout(false);
@@ -284,13 +264,9 @@ namespace hw12
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.ComboBox genderInput;
 		private System.Windows.Forms.Button addBtn;
-		private EduDBDataSet eduDBDataSet;
 		private System.Windows.Forms.BindingSource genderBindingSource;
-		private EduDBDataSetTableAdapters.GenderTableAdapter genderTableAdapter;
 		private System.Windows.Forms.BindingSource genderBindingSource1;
-		private EduDBDataSet1 eduDBDataSet1;
 		private System.Windows.Forms.BindingSource genderBindingSource2;
-		private EduDBDataSet1TableAdapters.GenderTableAdapter genderTableAdapter1;
 		private System.Windows.Forms.ComboBox roleInput;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox phoneInput;
