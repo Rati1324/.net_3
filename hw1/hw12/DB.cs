@@ -11,7 +11,25 @@ namespace hw12
 {
 	public class DB
 	{
+		public void Execute(string query)
+		{
+			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
+			{
+				using (SqlCommand com = new SqlCommand(query, conn))
+				{
+					conn.Open();
+					try
+					{
+						com.ExecuteNonQuery();
+					}
+					catch (Exception ex)
+					{
+						throw new Exception($"error {ex}");
+					}
+				}
+			}
 
+		}
 		public DataTable GetData(string query)
 
 		{

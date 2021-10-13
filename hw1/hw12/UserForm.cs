@@ -40,20 +40,18 @@ namespace hw12
 			}
 		}
 
-		
 		private void addBtn_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				User user = new User(idInput.Text, f_nameInput.Text, l_nameInput.Text, phoneInput.Text,
-					dobInput.Value.Date, (int)genderInput.SelectedValue, phoneInput.Text, emailInput.Text, 
-					(int)roleInput.SelectedValue);
-				user.insert();
+				User user = new User(null, f_nameInput.Text, l_nameInput.Text, idInput.Text, dobInput.Value.Date,
+					(int)genderInput.SelectedValue, phoneInput.Text, emailInput.Text, (int)roleInput.SelectedValue);
+				//MessageBox.Show(user.Insert());
+				user.Insert();
 			}
 
 			catch (Exception)
 			{
-
 				throw;
 			}
 		}

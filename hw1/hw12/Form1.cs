@@ -68,18 +68,29 @@ namespace hw12
 			// of the user and run the update method (todo) from the user class
 			var data = (DataGridView)sender;
 			var values = data.Rows[e.RowIndex];
-			string id = (string)values.Cells["ID"].Value;
-			string FistName = (string)values.Cells["FisrtName"].Value;
-			string LastName = (string)values.Cells["LastName"].Value;
-			string personalNumber = (string)values.Cells["PersonalNumber"].Value;
+
+			int id = Int32.Parse(values.Cells["ID"].Value.ToString());
+			string PersonalId = values.Cells["PersonalNumber"].Value.ToString();
+			string FistName = values.Cells["FirstName"].Value.ToString();
+			string LastName = values.Cells["LastName"].Value.ToString();
+			string personalNumber = values.Cells["PersonalNumber"].Value.ToString();
 			DateTime? birthDate = (DateTime?)values.Cells["BirthDate"].Value;
-			int genderId = (int)values.Cells["GenderId"].Value;
-			string phoneNumber = (string)values.Cells["PhoneNumber"].Value;
-			string email = (string)values.Cells["EMail"].Value;
-			int roleId = (int)values.Cells["RoleId"].Value;
+			int genderId = Int32.Parse(values.Cells["GenderID"].Value.ToString());
+			string phoneNumber = values.Cells["PhoneNumber"].Value.ToString();
+			string email = values.Cells["EMail"].Value.ToString();
+			int roleId = Int32.Parse(values.Cells["RoleId"].Value.ToString());
 
 			User u = new User(id, FistName, LastName, personalNumber, birthDate, genderId, phoneNumber, email, roleId);
-			
+
+			if (e.ColumnIndex == 0)
+			{
+				u.Update();
+			}
+			else if (e.ColumnIndex == 1)
+			{
+				u.Delete();
+				data.Rows.RemoveAt(e.RowIndex);
+			}
 		}
 	}
 }

@@ -33,6 +33,7 @@ namespace hw12
 			this.studentGrid = new System.Windows.Forms.DataGridView();
 			this.addBtn = new System.Windows.Forms.Button();
 			this.updateBtn = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.deleteBtn = new System.Windows.Forms.DataGridViewButtonColumn();
 			((System.ComponentModel.ISupportInitialize)(this.studentGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -50,7 +51,8 @@ namespace hw12
 			// 
 			this.studentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.studentGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.updateBtn});
+            this.updateBtn,
+            this.deleteBtn});
 			this.studentGrid.Location = new System.Drawing.Point(36, 67);
 			this.studentGrid.Name = "studentGrid";
 			this.studentGrid.Size = new System.Drawing.Size(715, 345);
@@ -69,8 +71,16 @@ namespace hw12
 			// 
 			// updateBtn
 			// 
-			this.updateBtn.HeaderText = "Update";
+			this.updateBtn.HeaderText = "Save Changes";
 			this.updateBtn.Name = "updateBtn";
+			this.updateBtn.Text = "Save Changes";
+			// 
+			// deleteBtn
+			// 
+			this.deleteBtn.HeaderText = "Delete";
+			this.deleteBtn.Name = "deleteBtn";
+			this.deleteBtn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.deleteBtn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
 			// Form1
 			// 
@@ -93,6 +103,7 @@ namespace hw12
 		private System.Windows.Forms.DataGridView studentGrid;
 		private System.Windows.Forms.Button addBtn;
 		private System.Windows.Forms.DataGridViewButtonColumn updateBtn;
+		private System.Windows.Forms.DataGridViewButtonColumn deleteBtn;
 	}
 }
 
