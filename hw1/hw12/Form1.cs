@@ -23,32 +23,9 @@ namespace hw12
 		{
 			try
 			{
-				string query = "SELECT * FROM Users";
-				string connString = ConfigurationManager.ConnectionStrings["edu"].ConnectionString;
-				SqlConnection conn = new SqlConnection(connString);
-				SqlCommand com = new SqlCommand(query, conn);
-				SqlDataReader sdr = null;
-
-				DataTable dt = new DataTable();
-				// WTF is this nested try - except??
-				try
-				{
-					conn.Open();
-					sdr = com.ExecuteReader();
-					SqlDataAdapter ad = new SqlDataAdapter(com);
-					dt.Load(sdr);
-				}
-				catch (Exception)
-				{
-					throw;
-				}
-				finally
-				{
-					conn.Close();
-					conn.Dispose();
-
-					studentGrid.DataSource = dt;
-				}
+				DB db = new DB();
+				DataTable dt = db.GetData("SELECT * FROM Users");
+				studentGrid.DataSource = dt;
 			}
 			catch (Exception ex)
 			{

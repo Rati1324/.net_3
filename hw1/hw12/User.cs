@@ -33,7 +33,6 @@ namespace hw12
 		
 		public void Insert()
 		{
-			//return this.birthDate.Value.ToString("yyyy-MM-dd");
 			var date = this.birthDate.Value.ToString("yyyy-MM-dd");
 			string query = $"INSERT INTO Users VALUES('{this.FirstName}', '{this.LastName}'," +
 				$"'{this.personalNumber}', '{date}', " +
@@ -41,12 +40,11 @@ namespace hw12
 			this.db.Execute(query);
 		}
 
-
 		public void Update()
 		{
-			var date = this.birthDate.Value.ToString("dd.MM.yyyy");
-			string query = $"UPDATE Users SET FirstName='{this.FirstName}', LastName='{this.LastName}', birthDate='{date}'," +
-				$"genderID={this.genderID}, phoneNumber='{this.phoneNumber}', eMail='{this.eMail}', roleID='{this.roleID}' WHERE id={this.id}";
+			string date = this.birthDate.Value.ToString("yyyy-MM-dd");
+			string query = $"UPDATE Users SET FirstName='{this.FirstName}', LastName='{this.LastName}', PersonalNumber='{this.personalNumber}', " +
+				$"BirthDate='{date}', GenderID={this.genderID}, PhoneNumber='{this.phoneNumber}', EMail='{this.eMail}', RoleID='{this.roleID}' WHERE id={this.id}";
 			this.db.Execute(query);
 		}
 

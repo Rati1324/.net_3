@@ -17,9 +17,9 @@ namespace hw12
 			{
 				using (SqlCommand com = new SqlCommand(query, conn))
 				{
-					conn.Open();
 					try
 					{
+						conn.Open();
 						com.ExecuteNonQuery();
 					}
 					catch (Exception ex)
@@ -31,20 +31,26 @@ namespace hw12
 
 		}
 		public DataTable GetData(string query)
-
 		{
 			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString);
 			{
 				using (SqlCommand com = new SqlCommand(query, conn))
 				{
-					conn.Open();
-					SqlDataReader sdr = com.ExecuteReader();
-					DataTable dt = new DataTable();
-					dt.Load(sdr);
-					return dt;
+					try
+					{
+						conn.Open();
+						SqlDataReader sdr = com.ExecuteReader();
+						DataTable dt = new DataTable();
+						dt.Load(sdr);
+						return dt;
+					}
+					catch (Exception ex)
+					{
+						throw new Exception($"error {ex}");
+					}
 				}
 			}
-		}
 
+		}
 	}
 }
