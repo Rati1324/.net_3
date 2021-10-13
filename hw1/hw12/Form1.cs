@@ -41,8 +41,6 @@ namespace hw12
 
 		private void studentGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-			// I have access to all the values that are updated. I'll just create an object 
-			// of the user and run the update method (todo) from the user class
 			var data = (DataGridView)sender;
 			var values = data.Rows[e.RowIndex];
 
