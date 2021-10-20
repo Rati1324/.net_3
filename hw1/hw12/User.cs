@@ -11,47 +11,15 @@ namespace hw12
 {
 	public class User
 	{
-		private int? id;
+		public int? Id;
 		public string FirstName;
 		public string LastName;
-		private string personalNumber;
-		private DateTime? birthDate;
-		private int genderID;
-		private string phoneNumber;
-		private string eMail;
-		private int roleID;
-		private DB db = new DB();
+		public string PersonalNumber;
+		public DateTime? BirthDate;
+		public int GenderID;
+		public string PhoneNumber;
+		public string EMail;
+		public int RoleID;
 		
-		public User(int? id, string FirstName, string LastName, string personalNumber, DateTime? birthDate, 
-			int genderID, string phoneNumber, string eMail, int roleID)
-		{
-			this.id = id; this.FirstName = FirstName; this.LastName = LastName;
-			this.personalNumber = personalNumber; this.birthDate = birthDate;
-			this.genderID = genderID; this.phoneNumber = phoneNumber;
-			this.eMail = eMail; this.roleID = roleID;
-		}
-		
-		public void Insert()
-		{
-			var date = this.birthDate.Value.ToString("yyyy-MM-dd");
-			string query = $"INSERT INTO Users VALUES('{this.FirstName}', '{this.LastName}'," +
-				$"'{this.personalNumber}', '{date}', " +
-				$"{this.genderID}, '{this.phoneNumber}', '{this.eMail}', {this.roleID})";
-			this.db.Execute(query);
-		}
-
-		public void Update()
-		{
-			string date = this.birthDate.Value.ToString("yyyy-MM-dd");
-			string query = $"UPDATE Users SET FirstName='{this.FirstName}', LastName='{this.LastName}', PersonalNumber='{this.personalNumber}', " +
-				$"BirthDate='{date}', GenderID={this.genderID}, PhoneNumber='{this.phoneNumber}', EMail='{this.eMail}', RoleID='{this.roleID}' WHERE id={this.id}";
-			this.db.Execute(query);
-		}
-
-		public void Delete()
-		{
-			string query = $"DELETE from Users WHERE id = {this.id}";
-			this.db.Execute(query);
-		}
 	}
 }

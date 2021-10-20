@@ -14,6 +14,7 @@ namespace hw12
 {
 	public partial class Form1 : Form
 	{
+		private User currentUser = null;
 		public Form1()
 		{
 			InitializeComponent();
@@ -23,8 +24,7 @@ namespace hw12
 		{
 			try
 			{
-				DB db = new DB();
-				DataTable dt = db.GetData("SELECT * FROM Users");
+				DataTable dt = DB.GetData("SELECT * FROM Users");
 				studentGrid.DataSource = dt;
 			}
 			catch (Exception ex)
@@ -39,32 +39,87 @@ namespace hw12
 			user.Show();
 		}
 
-		private void studentGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+	
+		private void saveBtn_Click(object sender, EventArgs e)
 		{
-			var data = (DataGridView)sender;
-			var values = data.Rows[e.RowIndex];
-
-			int id = Int32.Parse(values.Cells["ID"].Value.ToString());
-			string PersonalId = values.Cells["PersonalNumber"].Value.ToString();
-			string FistName = values.Cells["FirstName"].Value.ToString();
-			string LastName = values.Cells["LastName"].Value.ToString();
-			string personalNumber = values.Cells["PersonalNumber"].Value.ToString();
-			DateTime? birthDate = (DateTime?)values.Cells["BirthDate"].Value;
-			int genderId = Int32.Parse(values.Cells["GenderID"].Value.ToString());
-			string phoneNumber = values.Cells["PhoneNumber"].Value.ToString();
-			string email = values.Cells["EMail"].Value.ToString();
-			int roleId = Int32.Parse(values.Cells["RoleId"].Value.ToString());
-
-			User u = new User(id, FistName, LastName, personalNumber, birthDate, genderId, phoneNumber, email, roleId);
-
-			if (e.ColumnIndex == 0)
+			try
 			{
-				u.Update();
+				if (currentUser != null)
+				{
+					string date = currentUser.BirthDate.Value.ToString("yyyy-MM-dd");
+					string query = $"UPDATE Users SET FirstName='{currentUser.FirstName}', LastName='{currentUser.LastName}', PersonalNumber='{currentUser.PersonalNumber}', " +
+						$"BirthDate='{date}', GenderID={currentUser.GenderID}, PhoneNumber='{currentUser.PhoneNumber}', EMail='{currentUser.EMail}', RoleID='{currentUser.RoleID}' WHERE id={currentUser.Id}";
+					DB.Execute(query);
+				}
 			}
-			else if (e.ColumnIndex == 1)
+			catch (Exception x)
 			{
-				u.Delete();
-				data.Rows.RemoveAt(e.RowIndex);
+				MessageBox.Show($"Error has occured: {x.Message}");
+				throw;
+			}
+		}
+
+		private void deleteBtn_Click(object sender, EventArgs e)
+		{
+			if (currentUser != null)
+			{
+				if(MessageBox.Show("დარწმუნებული ხართ, რომ გსურთ წაშლა?", "შეკითხვა", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes)
+				{
+					try
+					{
+						string query = "DELETE from Users WHERE id = @UserId";
+						using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString))
+						{
+							using (SqlCommand com = new SqlCommand(query, conn))
+							{
+								com.Parameters.AddWithValue("@UserId", currentUser.Id);
+								try
+								{
+									conn.Open();
+									com.ExecuteNonQuery();
+								}
+								catch (Exception ex)
+								{
+									throw new Exception($"error {ex}");
+								}
+							}
+						}
+
+						studentGrid.Rows.Remove(studentGrid.SelectedRows[0]);
+					}
+					catch (Exception x)
+					{
+						MessageBox.Show($"Error has occured: {x.Message}");
+					}
+				
+				}
+			}
+		}
+
+		private void studentGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			try
+			{
+				if (studentGrid.SelectedRows.Count == 1 && e.RowIndex != studentGrid.Rows.Count - 1)
+				{
+					var row = studentGrid.SelectedRows[0];
+					currentUser = new User();
+					
+					currentUser.Id = Int32.Parse(row.Cells["ID"].Value.ToString());
+					currentUser.PersonalNumber = row.Cells["PersonalNumber"].Value.ToString();
+					currentUser.FirstName = row.Cells["FirstName"].Value.ToString();
+					currentUser.LastName = row.Cells["LastName"].Value.ToString();
+					currentUser.PersonalNumber = row.Cells["PersonalNumber"].Value.ToString();
+					currentUser.BirthDate = (DateTime?)row.Cells["BirthDate"].Value;
+					currentUser.GenderID = Int32.Parse(row.Cells["GenderID"].Value.ToString());
+					currentUser.PhoneNumber = row.Cells["PhoneNumber"].Value.ToString();
+					currentUser.EMail = row.Cells["EMail"].Value.ToString();
+					currentUser.RoleID = Int32.Parse(row.Cells["RoleId"].Value.ToString());
+				}
+			}
+			catch (Exception x)
+			{
+				MessageBox.Show($"Error: {x.Message}");
 			}
 		}
 	}

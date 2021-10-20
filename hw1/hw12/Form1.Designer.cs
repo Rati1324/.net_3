@@ -32,8 +32,8 @@ namespace hw12
 			this.importBtn = new System.Windows.Forms.Button();
 			this.studentGrid = new System.Windows.Forms.DataGridView();
 			this.addBtn = new System.Windows.Forms.Button();
-			this.updateBtn = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.deleteBtn = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.saveBtn = new System.Windows.Forms.Button();
+			this.deleteBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.studentGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -50,14 +50,13 @@ namespace hw12
 			// studentGrid
 			// 
 			this.studentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.studentGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.updateBtn,
-            this.deleteBtn});
 			this.studentGrid.Location = new System.Drawing.Point(36, 67);
+			this.studentGrid.MultiSelect = false;
 			this.studentGrid.Name = "studentGrid";
+			this.studentGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.studentGrid.Size = new System.Drawing.Size(715, 345);
 			this.studentGrid.TabIndex = 1;
-			this.studentGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studentGrid_CellContentClick);
+			this.studentGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.studentGrid_RowEnter);
 			// 
 			// addBtn
 			// 
@@ -69,24 +68,33 @@ namespace hw12
 			this.addBtn.UseVisualStyleBackColor = true;
 			this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
 			// 
-			// updateBtn
+			// saveBtn
 			// 
-			this.updateBtn.HeaderText = "Save Changes";
-			this.updateBtn.Name = "updateBtn";
-			this.updateBtn.Text = "Save Changes";
+			this.saveBtn.Location = new System.Drawing.Point(560, 23);
+			this.saveBtn.Name = "saveBtn";
+			this.saveBtn.Size = new System.Drawing.Size(94, 23);
+			this.saveBtn.TabIndex = 3;
+			this.saveBtn.Text = "Save changes";
+			this.saveBtn.UseVisualStyleBackColor = true;
+			this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
 			// 
 			// deleteBtn
 			// 
-			this.deleteBtn.HeaderText = "Delete";
+			this.deleteBtn.Location = new System.Drawing.Point(676, 23);
 			this.deleteBtn.Name = "deleteBtn";
-			this.deleteBtn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.deleteBtn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+			this.deleteBtn.TabIndex = 3;
+			this.deleteBtn.Text = "Delete";
+			this.deleteBtn.UseVisualStyleBackColor = true;
+			this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.deleteBtn);
+			this.Controls.Add(this.saveBtn);
 			this.Controls.Add(this.addBtn);
 			this.Controls.Add(this.studentGrid);
 			this.Controls.Add(this.importBtn);
@@ -102,8 +110,8 @@ namespace hw12
 		private System.Windows.Forms.Button importBtn;
 		private System.Windows.Forms.DataGridView studentGrid;
 		private System.Windows.Forms.Button addBtn;
-		private System.Windows.Forms.DataGridViewButtonColumn updateBtn;
-		private System.Windows.Forms.DataGridViewButtonColumn deleteBtn;
+		private System.Windows.Forms.Button saveBtn;
+		private System.Windows.Forms.Button deleteBtn;
 	}
 }
 

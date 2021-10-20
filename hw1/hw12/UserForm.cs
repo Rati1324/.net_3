@@ -23,13 +23,12 @@ namespace hw12
 		{
 			try
 			{
-				DB db = new DB();
-				DataTable dtGender = db.GetData("SELECT ID, NameGe as 'NAME' FROM Gender");
+				DataTable dtGender = DB.GetData("SELECT ID, NameGe as 'NAME' FROM Gender");
 				genderInput.DataSource = dtGender;
 				genderInput.DisplayMember = "NAME";
 				genderInput.ValueMember = "ID";
 
-				DataTable dtRoles = db.GetData("SELECT ID, NameGe AS 'NAME' FROM Roles");
+				DataTable dtRoles = DB.GetData("SELECT ID, NameGe AS 'NAME' FROM Roles");
 				roleInput.DataSource = dtRoles;
 				roleInput.DisplayMember = "NAME";
 				roleInput.ValueMember = "ID";
@@ -44,15 +43,36 @@ namespace hw12
 		{
 			try
 			{
-				User user = new User(null, f_nameInput.Text, l_nameInput.Text, idInput.Text, dobInput.Value.Date,
-					(int)genderInput.SelectedValue, phoneInput.Text, emailInput.Text, (int)roleInput.SelectedValue);
-				//MessageBox.Show(user.Insert());
-				user.Insert();
+				User user = new User();
+				user.FirstName = f_nameInput.Text;
+				user.LastName = l_nameInput.Text;
+				
+				user.PersonalNumber = idInput.Text;
+				user.BirthDate = dobInput.Value.Date;
+				user.GenderID = (int)genderInput.SelectedValue;
+				user.PhoneNumber = phoneInput.Text;
+				user.EMail = emailInput.Text;
+				user.RoleID = (int)roleInput.SelectedValue;
+
+				try
+				{
+					var date = user.BirthDate.Value.ToString("yyyy-MM-dd");
+					string query = $"INSERT INTO Users VALUES('{user.FirstName}', '{user.LastName}'," +
+						$"'{user.PersonalNumber}', '{user.BirthDate}', " +
+						$"{user.GenderID}, '{user.PhoneNumber}', '{user.EMail}', {user.RoleID})";
+					DB.Execute(query);
+
+				}
+				catch (Exception)
+				{
+
+					throw;
+				}
 			}
 
-			catch (Exception)
+			catch (Exception x)
 			{
-				throw;
+				MessageBox.Show($"Error {x.Message}");
 			}
 		}
 	}
