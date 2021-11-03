@@ -1,0 +1,15 @@
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\presentation.exe.config
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\presentation.exe
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\presentation.pdb
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Security.AccessControl.dll
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Security.Permissions.dll
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Security.AccessControl.xml
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Security.Permissions.xml
+C:\Users\rati\source\repos\presentation\presentation\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\rati\source\repos\presentation\presentation\obj\Debug\presentation.csproj.AssemblyReference.cache
+C:\Users\rati\source\repos\presentation\presentation\obj\Debug\presentation.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\presentation\presentation\obj\Debug\presentation.exe
+C:\Users\rati\source\repos\presentation\presentation\obj\Debug\presentation.pdb
