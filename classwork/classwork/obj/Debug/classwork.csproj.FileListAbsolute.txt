@@ -1,0 +1,7 @@
+C:\Users\rati\source\repos\classwork\classwork\bin\Debug\classwork.exe.config
+C:\Users\rati\source\repos\classwork\classwork\bin\Debug\classwork.exe
+C:\Users\rati\source\repos\classwork\classwork\bin\Debug\classwork.pdb
+C:\Users\rati\source\repos\classwork\classwork\obj\Debug\classwork.csproj.AssemblyReference.cache
+C:\Users\rati\source\repos\classwork\classwork\obj\Debug\classwork.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\classwork\classwork\obj\Debug\classwork.exe
+C:\Users\rati\source\repos\classwork\classwork\obj\Debug\classwork.pdb
