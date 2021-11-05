@@ -12,7 +12,6 @@ namespace classwork
 	{
 		static void Main(string[] args)
 		{
-			#region create author
 			try
 			{
 				Author a = new Author();
@@ -51,12 +50,22 @@ namespace classwork
 					{
 						try
 						{
-							SqlCommand comAuthor = new SqlCommand(queryAuthor, conn, tran);
-							comAuthor.Parameters.AddWithValue("@F_name", a.F_name);
-							comAuthor.Parameters.AddWithValue("@L_name", a.L_name);
-							comAuthor.Parameters.AddWithValue("@Dob", a.Dob.ToString("yyyy-MM-dd"));
-
-							int authorId = (int)comAuthor.ExecuteScalar();
+							int authorId;
+							string checkQuery = $"IF EXISTS (SELECT id from author WHERE f_name='{a.F_name}' AND l_name='{a.L_name}') SELECT 1 ELSE SELECT 0";
+							int exists = (int)new SqlCommand(checkQuery, conn, tran).ExecuteScalar();
+							if (exists > 0)
+							{
+								authorId = (int)new SqlCommand($"SELECT TOP(1) id from author AS a WHERE f_name='{a.F_name}' AND a.l_name='{a.L_name}'", conn, tran).ExecuteScalar();
+							}
+							else
+							{
+								SqlCommand comAuthor = new SqlCommand(queryAuthor, conn, tran);
+								comAuthor.Parameters.AddWithValue("@F_name", a.F_name);
+								comAuthor.Parameters.AddWithValue("@L_name", a.L_name);
+								comAuthor.Parameters.AddWithValue("@Dob", a.Dob.ToString("yyyy-MM-dd"));
+								authorId = (int)comAuthor.ExecuteScalar();
+							}
+							
 							foreach (Book book in a.Books)
 							{
 								SqlCommand comBook = new SqlCommand(queryBook, conn, tran);
@@ -72,13 +81,14 @@ namespace classwork
 							}
 							tran.Commit();
 						}
-						catch (SqlException se)
-						{
-							tran.Rollback();
-							throw new Exception(se.Message);
-						}
+						//catch (SqlException se)
+						//{
+						//	tran.Rollback();
+						//	throw new Exception(se.Message);
+						//}
 						catch (Exception ex)
 						{
+							tran.Rollback();
 							throw new Exception(ex.Message);
 						}
 					}
@@ -88,7 +98,6 @@ namespace classwork
 			{
 				throw;
 			}
-			#endregion
 		}
 	}
 }
