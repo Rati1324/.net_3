@@ -24,6 +24,7 @@ namespace BackEnd
 			DateTime date = new DateTime(2010, 1, 2);
 			string f_name = "jack";
 			string l_name = "jackson";
+			
 			// Checking for already existing rows is stupid??
 			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString))
 			{
@@ -42,37 +43,44 @@ namespace BackEnd
 						}
 						else
 						{
-							SqlCommand testQuery = new SqlCommand("Insert into book values(sds,2,3,1999-2-)", conn, tran);
-
 							SqlCommand comBook = new SqlCommand("insert_book", conn, tran);
 							comBook.CommandType = CommandType.StoredProcedure;
-							SqlParameter param1 = comBook.Parameters.Add("@name", SqlDbType.NVarChar);
-							param1.Value = name;
-							SqlParameter param2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
-							param2.Value = pages;
-							SqlParameter param3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
-							param3.Value = publisher;
-							SqlParameter param4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
-							param4.Value = date;
+							SqlParameter bookParam1 = comBook.Parameters.Add("@name", SqlDbType.NVarChar);
+							bookParam1.Value = name;
+							SqlParameter bookParam2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
+							bookParam2.Value = pages;
+							SqlParameter bookParam3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
+							bookParam3.Value = publisher;
+							SqlParameter bookParam4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
+							bookParam4.Value = date;
 							Console.WriteLine("fuck");
 							bookId = (int)comBook.ExecuteScalar();
-							throw new Exception("fuck you");
-							tran.Commit();
 						}
 
-						// Inserting author
-						//checkQuery = $"IF EXISTS (SELECT id FROM author WHERE f_name='{f_name}' AND l_name='{l_name}') SELECT 1 ELSE SELECT 0"
-						//exists = (int)new SqlCommand()
-						//com.CommandType = CommandType.StoredProcedure;
-						//SqlParameter param1 = com.Parameters.AddWithValue("@name", SqlDbType.NVarChar);
-						//param1.Value = name;
-						//SqlParameter param2 = com.Parameters.AddWithValue("@pages", SqlDbType.Int);
-						//param2.Value = pages;
-						//SqlParameter param3 = com.Parameters.AddWithValue("@publisher_id", SqlDbType.Int);
-						//param3.Value = publisher;
-						//SqlParameter param4 = com.Parameters.AddWithValue("@pub_date", SqlDbType.Date);
-						//param4.Value = date;
-						//com.ExecuteScalar();
+						// Inserting author. I'm not checking for already existing rows maybe add that later!
+						int authorId;
+						SqlCommand comAuthor = new SqlCommand("insert_author", conn, tran);
+						comAuthor.CommandType = CommandType.StoredProcedure;
+						SqlParameter authorParam1 = comAuthor.Parameters.AddWithValue("@f_name", SqlDbType.NVarChar);
+						authorParam1.Value = f_name;
+						SqlParameter authorParam2 = comAuthor.Parameters.AddWithValue("@l_name", SqlDbType.NVarChar);
+						authorParam2.Value = l_name;
+						authorId = (int)comAuthor.ExecuteScalar();
+
+						// Inserting author_book
+						SqlCommand comAuthorBook = new SqlCommand("insert_author_book", conn, tran);
+						comAuthorBook.CommandType = CommandType.StoredProcedure;
+						SqlParameter authorBookParam1 = comAuthorBook.Parameters.AddWithValue("@author_id", SqlDbType.NVarChar);
+						authorBookParam1.Value = authorId;
+						SqlParameter authorBookParam2 = comAuthorBook.Parameters.AddWithValue("@book_id", SqlDbType.NVarChar);
+						authorBookParam2.Value = bookId;
+						Console.WriteLine(authorId);
+						Console.WriteLine(bookId);
+
+						// Works but cant do it twice with same book
+						comAuthorBook.ExecuteNonQuery();
+
+						tran.Commit();
 					}
 					catch (Exception ex)
 					{
