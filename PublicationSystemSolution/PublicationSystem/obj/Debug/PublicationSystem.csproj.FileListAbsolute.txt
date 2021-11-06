@@ -7,3 +7,15 @@ C:\Users\rati\source\repos\PublicationSystemSolution\PublicationSystem\obj\Debug
 C:\Users\rati\source\repos\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.csproj.CoreCompileInputs.cache
 C:\Users\rati\source\repos\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.exe
 C:\Users\rati\source\repos\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.pdb
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\bin\Debug\PublicationSystem.exe.config
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\bin\Debug\PublicationSystem.exe
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\bin\Debug\PublicationSystem.pdb
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.csproj.AssemblyReference.cache
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.Form1.resources
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.Properties.Resources.resources
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.csproj.GenerateResource.cache
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.exe
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\PublicationSystem\obj\Debug\PublicationSystem.pdb
