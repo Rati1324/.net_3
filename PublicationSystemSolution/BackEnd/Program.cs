@@ -18,13 +18,12 @@ namespace BackEnd
 		}
 		static void Main(string[] args)
 		{
-			string name = "book2";
+			string name = "book3";
 			int pages = 200;
-			int publisher = 2;
+			string publisher = "publisher30";
 			DateTime date = new DateTime(2010, 1, 2);
 			string f_name = "jack";
 			string l_name = "jackson";
-			
 			// Checking for already existing rows is stupid??
 			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString))
 			{
@@ -35,12 +34,26 @@ namespace BackEnd
 					{
 						// Inserting book
 						int bookId;
-						string checkQuery = $"IF EXISTS (SELECT id FROM book WHERE name='{name}') SELECT 1 ELSE SELECT 0";
-						int exists = (int)new SqlCommand(checkQuery, conn, tran).ExecuteScalar();
+						int publisherId;
+						string checkPubQuery = $"SELECT ISNULL((SELECT id from publisher WHERE name='{publisher}'), 0)";
+						int exists = (int) new SqlCommand(checkPubQuery, conn, tran).ExecuteScalar();
+						// Check if publisher exists
+						if (exists != 0)
+						{
+							publisherId = exists;
+						}
+						else
+						{
+							// add the publisher
+							publisherId = new SqlCommand($"INSERT INTO publisher VALUES('{publisher}')", conn, tran).ExecuteNonQuery();
+						}
+	string checkQuery = $"IF EXISTS (SELECT id FROM book WHERE name='{name}') SELECT 1 ELSE SELECT 0";
+						exists = (int)new SqlCommand(checkQuery, conn, tran).ExecuteScalar();
 						if (exists > 0)
 						{
 							bookId = (int)new SqlCommand($"SELECT TOP(1) id FROM author WHERE f_name='{f_name}' AND l_name='{l_name}'", conn, tran).ExecuteScalar();
 						}
+
 						else
 						{
 							SqlCommand comBook = new SqlCommand("insert_book", conn, tran);
@@ -50,7 +63,7 @@ namespace BackEnd
 							SqlParameter bookParam2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
 							bookParam2.Value = pages;
 							SqlParameter bookParam3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
-							bookParam3.Value = publisher;
+							bookParam3.Value = publisherId;
 							SqlParameter bookParam4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
 							bookParam4.Value = date;
 							Console.WriteLine("fuck");
@@ -80,7 +93,9 @@ namespace BackEnd
 						// Works but cant do it twice with same book
 						comAuthorBook.ExecuteNonQuery();
 
+						// Inserting publisher
 						tran.Commit();
+
 					}
 					catch (Exception ex)
 					{
