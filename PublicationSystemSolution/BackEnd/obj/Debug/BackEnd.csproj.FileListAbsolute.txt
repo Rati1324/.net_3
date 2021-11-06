@@ -5,3 +5,10 @@ C:\Users\rati\source\repos\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.c
 C:\Users\rati\source\repos\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.csproj.CoreCompileInputs.cache
 C:\Users\rati\source\repos\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.exe
 C:\Users\rati\source\repos\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.pdb
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\bin\Debug\BackEnd.exe.config
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\bin\Debug\BackEnd.exe
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\bin\Debug\BackEnd.pdb
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.csproj.AssemblyReference.cache
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.exe
+C:\Users\rati\source\repos\.net_3\PublicationSystemSolution\BackEnd\obj\Debug\BackEnd.pdb
