@@ -40,7 +40,7 @@ namespace PublicationSystem
 		public virtual DataTable GetInfo()
 		{
 			DataTable Data; 
-			Data = GetData("SELECT name, pub_date FROM book");
+			Data = GetData("SELECT name 'Name', pub_date 'Date' FROM book");
 			return Data;
 		}
 	}

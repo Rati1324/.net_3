@@ -15,14 +15,19 @@ namespace PublicationSystem
 		{
 			DataTable Data = base.GetInfo();
 			DataTable Data2 = base.GetData("select_book");
-
+			
 			foreach (DataColumn col in Data2.Columns)
 			{
-				//Data2.Columns[0].ColumnName;
-				Data.Columns.Add(col.ColumnName = char.ToUpper(col.ColumnName[0]) + col.ColumnName.Substring(1, col.ColumnName.Length - 1));
-;
+				Data.Columns.Add(col.ColumnName);
+				//Data.Columns.Add(col.ColumnName = char.ToUpper(col.ColumnName[0]) + col.ColumnName.Substring(1, col.ColumnName.Length - 1));
 			}
-			return Data2;
+
+			for (int i = 0; i < Data.Rows.Count; i++)
+			{
+				Data.Rows[i]["Pages"] = Data2.Rows[i]["Pages"];
+				Data.Rows[i]["Publisher name"] = Data2.Rows[i]["Publisher name"];
+			}
+			return Data;
 		}
 	}
 }
