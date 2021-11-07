@@ -11,23 +11,39 @@ namespace PublicationSystem
 	{
 		public int pages { set; get; }
 		public string publisher { set; get; }
+
+		public DataTable GetAuthors(int bookId)
+		{
+			DataTable Authors = GetData($"select_authors {bookId}");
+			return Authors;
+		}
+
 		public override DataTable GetInfo()
 		{
-			DataTable Data = base.GetInfo();
-			DataTable Data2 = base.GetData("select_book");
-			
-			foreach (DataColumn col in Data2.Columns)
+			// Use parameterized procedures
+			DataTable publicationData = base.GetInfo();
+			DataTable bookData = base.GetData("select_book");
+		
+			for (int i = 1; i < bookData.Columns.Count; i++)
 			{
-				Data.Columns.Add(col.ColumnName);
-				//Data.Columns.Add(col.ColumnName = char.ToUpper(col.ColumnName[0]) + col.ColumnName.Substring(1, col.ColumnName.Length - 1));
+				publicationData.Columns.Add(bookData.Columns[i].ColumnName);
 			}
+			publicationData.Columns.Add("Authors");
 
-			for (int i = 0; i < Data.Rows.Count; i++)
+			DataTable Authors;
+			for (int i = 0; i < publicationData.Rows.Count; i++)
 			{
-				Data.Rows[i]["Pages"] = Data2.Rows[i]["Pages"];
-				Data.Rows[i]["Publisher name"] = Data2.Rows[i]["Publisher name"];
+				Authors = GetAuthors((int)bookData.Rows[i]["id"]);
+
+				publicationData.Rows[i]["Pages"] = bookData.Rows[i]["Pages"];
+				publicationData.Rows[i]["Publisher name"] = bookData.Rows[i]["Publisher name"];
+
+				foreach (DataRow row in Authors.Rows)
+				{
+					publicationData.Rows[i]["Authors"] += row["f_name"] + " " + row["l_name"] + ", ";
+				}
 			}
-			return Data;
+			return publicationData;
 		}
 	}
 }
