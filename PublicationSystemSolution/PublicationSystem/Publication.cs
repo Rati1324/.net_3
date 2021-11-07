@@ -18,7 +18,7 @@ namespace PublicationSystem
 
 		public DataTable GetData(string query)
 		{
-			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["edu"].ConnectionString);
+			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
 			{
 				using (SqlCommand com = new SqlCommand(query, conn))
 				{
@@ -40,8 +40,7 @@ namespace PublicationSystem
 		public virtual DataTable GetInfo()
 		{
 			DataTable Data; 
-			string query = $"SELECT * FROM book";
-			Data = GetData(query);
+			Data = GetData("SELECT name, pub_date FROM book");
 			return Data;
 		}
 	}

@@ -19,15 +19,10 @@ namespace PublicationSystem
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			dataGrid.Columns.Add("Name", "Name");
-			dataGrid.Columns.Add("Authors", "Authors");
-			dataGrid.Columns.Add("Publisher", "Publisher");
-			dataGrid.Columns.Add("Date", "Date");
-
 			Book B = new Book();
-			B.test2();
-			//DataTable bookData = B.GetInfo();
-
+			B.GetInfo();
+			DataTable bookData = B.GetInfo();
+			dataGrid.DataSource = bookData;
 		}
 	}
 }

@@ -11,15 +11,18 @@ namespace PublicationSystem
 	{
 		public int pages { set; get; }
 		public string publisher { set; get; }
-
-		public string test2()
-		{
-			return "asd";
-		}
 		public override DataTable GetInfo()
 		{
 			DataTable Data = base.GetInfo();
-			return Data;
+			DataTable Data2 = base.GetData("select_book");
+
+			foreach (DataColumn col in Data2.Columns)
+			{
+				//Data2.Columns[0].ColumnName;
+				Data.Columns.Add(col.ColumnName = char.ToUpper(col.ColumnName[0]) + col.ColumnName.Substring(1, col.ColumnName.Length - 1));
+;
+			}
+			return Data2;
 		}
 	}
 }
