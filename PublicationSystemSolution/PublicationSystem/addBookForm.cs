@@ -23,17 +23,11 @@ namespace PublicationSystem
 		private void bRegButton_Click(object sender, EventArgs e)
 		{
 
-			//string name = bNameInput.Text;
-			//int pages = Int32.Parse(bPagesInput.Text);
-			//string publisher = bPubInput.Text;
-			//DateTime date = Convert.ToDateTime(bDateInput.Text);
-			// This only works for one author, we need to parse the author field into an array
-			// AUTHORS ARRAY HERE 
+			string name = bNameInput.Text;
+			int pages = Int32.Parse(bPagesInput.Text);
+			string publisher = bPubInput.Text;
+			DateTime date = Convert.ToDateTime(bDateInput.Text);
 			ArrayList authorsList = new ArrayList() { new string[] { "Nick", "Nickson" }, new string[] { "Mari", "Maridze2" } };
-			string name = "book12";
-			int pages = 200;
-			string publisher = "publisher30";
-			DateTime date = new DateTime(2010, 1, 2);
 
 			// Checking for already existing rows is stupid??
 			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString))
