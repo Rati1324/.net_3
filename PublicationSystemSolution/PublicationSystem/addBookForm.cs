@@ -27,7 +27,9 @@ namespace PublicationSystem
 			int pages = Int32.Parse(bPagesInput.Text);
 			string publisher = bPubInput.Text;
 			DateTime date = Convert.ToDateTime(bDateInput.Text);
-			ArrayList authorsList = new ArrayList() { new string[] { "Nick", "Nickson" }, new string[] { "Mari", "Maridze2" } };
+
+			string authorsString = bAuthorsInput.Text;
+			string[] authorsList = authorsString.Split(new string[] { ", " }, StringSplitOptions.None);
 
 			// Checking for already existing rows is stupid??
 			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString))
@@ -37,11 +39,12 @@ namespace PublicationSystem
 				{
 					try
 					{
-						// Inserting book
 						int bookId;
+						// Inserting publisher
 						int publisherId;
 						string checkPubQuery = $"SELECT ISNULL((SELECT id from publisher WHERE name='{publisher}'), 0)";
 						int exists = (int) new SqlCommand(checkPubQuery, conn, tran).ExecuteScalar();
+
 						// Check if publisher exists
 						if (exists != 0)
 						{
@@ -49,15 +52,17 @@ namespace PublicationSystem
 						}
 						else
 						{
-							// add the publisher
-							publisherId = new SqlCommand($"INSERT INTO publisher VALUES('{publisher}')", conn, tran).ExecuteNonQuery();
+							publisherId = (int) new SqlCommand($"insert_publisher '{publisher}'", conn, tran).ExecuteScalar();
 						}
-						string checkQuery = $"IF EXISTS (SELECT id FROM book WHERE name='{name}') SELECT 1 ELSE SELECT 0";
-						exists = (int)new SqlCommand(checkQuery, conn, tran).ExecuteScalar();
+
+						// Inserting book
+						string checkBookQuery = $"IF EXISTS (SELECT id FROM book WHERE name='{name}') SELECT 1 ELSE SELECT 0";
+						exists = (int)new SqlCommand(checkBookQuery, conn, tran).ExecuteScalar();
 
 						// This doesn't work need to check later
 						if (exists > 0)
 						{
+							// DONT INSERT
 							//bookId = (int)new SqlCommand($"SELECT TOP(1) id FROM author WHERE f_name='{f_name}' AND l_name='{l_name}'", conn, tran).ExecuteScalar();
 						}
 
@@ -78,7 +83,7 @@ namespace PublicationSystem
 
 						// Inserting author. I'm not checking for already existing rows maybe add that later!
 						SqlCommand comAuthors;
-						foreach (string[] a in authorsList)
+						foreach (string a in authorsList)
 						{
 							comAuthors = new SqlCommand("insert_author", conn, tran);
 							comAuthors.CommandType = CommandType.StoredProcedure;
@@ -88,7 +93,6 @@ namespace PublicationSystem
 							authorsParam2.Value = a[1];
 							comAuthors.ExecuteNonQuery();
 						}
-						// Inserting publisher
 						tran.Commit();
 					}
 					catch (Exception ex)
