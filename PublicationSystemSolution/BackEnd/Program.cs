@@ -15,7 +15,11 @@ namespace BackEnd
 		static void Main(string[] args)
 		{
 			string x = "jack jackson, mack mackson, ";
-			Console.WriteLine(x[0]);
+			var x2 = x.Split(new string[] { ", " }, StringSplitOptions.None);
+			foreach (var item in x2)
+			{
+				Console.WriteLine(item);
+			}
 		}
 	}
 }

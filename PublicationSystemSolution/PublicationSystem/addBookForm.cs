@@ -30,7 +30,6 @@ namespace PublicationSystem
 
 			string authorsString = bAuthorsInput.Text;
 			string[] authorsList = authorsString.Split(new string[] { ", " }, StringSplitOptions.None);
-
 			// Checking for already existing rows is stupid??
 			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString))
 			{
@@ -40,6 +39,7 @@ namespace PublicationSystem
 					try
 					{
 						int bookId;
+						int authorId = 0;
 						// Inserting publisher
 						int publisherId;
 						string checkPubQuery = $"SELECT ISNULL((SELECT id from publisher WHERE name='{publisher}'), 0)";
@@ -57,43 +57,64 @@ namespace PublicationSystem
 
 						// Inserting book
 						string checkBookQuery = $"IF EXISTS (SELECT id FROM book WHERE name='{name}') SELECT 1 ELSE SELECT 0";
-						exists = (int)new SqlCommand(checkBookQuery, conn, tran).ExecuteScalar();
+						bookId = (int)new SqlCommand(checkBookQuery, conn, tran).ExecuteScalar();
 
 						// This doesn't work need to check later
-						if (exists > 0)
+						if (bookId > 0)
 						{
-							// DONT INSERT
-							//bookId = (int)new SqlCommand($"SELECT TOP(1) id FROM author WHERE f_name='{f_name}' AND l_name='{l_name}'", conn, tran).ExecuteScalar();
+							bookId = (int)new SqlCommand($"SELECT TOP(1) id from book WHERE name='{name}'", conn, tran).ExecuteScalar();
 						}
 
-						else
-						{
-							SqlCommand comBook = new SqlCommand("insert_book", conn, tran);
-							comBook.CommandType = CommandType.StoredProcedure;
-							SqlParameter bookParam1 = comBook.Parameters.Add("@name", SqlDbType.NVarChar);
-							bookParam1.Value = name;
-							SqlParameter bookParam2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
-							bookParam2.Value = pages;
-							SqlParameter bookParam3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
-							bookParam3.Value = publisherId;
-							SqlParameter bookParam4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
-							bookParam4.Value = date;
-							bookId = (int)comBook.ExecuteScalar();
-						}
+						SqlCommand comBook = new SqlCommand("insert_book", conn, tran);
+						comBook.CommandType = CommandType.StoredProcedure;
+						SqlParameter bookParam1 = comBook.Parameters.Add("@name", SqlDbType.NVarChar);
+						bookParam1.Value = name;
+						SqlParameter bookParam2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
+						bookParam2.Value = pages;
+						SqlParameter bookParam3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
+						bookParam3.Value = publisherId;
+						SqlParameter bookParam4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
+						bookParam4.Value = date;
+						bookId = (int)comBook.ExecuteScalar();
 
-						// Inserting author. I'm not checking for already existing rows maybe add that later!
+						// Inserting author
 						SqlCommand comAuthors;
+						SqlCommand comAuthorBook;
+						string checkAuthorQuery;
+						string f_name, l_name;
 						foreach (string a in authorsList)
 						{
-							comAuthors = new SqlCommand("insert_author", conn, tran);
-							comAuthors.CommandType = CommandType.StoredProcedure;
-							SqlParameter authorsParam1 = comAuthors.Parameters.AddWithValue("f_name", SqlDbType.NVarChar);
-							authorsParam1.Value = a[0];
-							SqlParameter authorsParam2 = comAuthors.Parameters.AddWithValue("l_name", SqlDbType.NVarChar);
-							authorsParam2.Value = a[1];
-							comAuthors.ExecuteNonQuery();
+							string[] fullName = a.Split(new string[] { " " }, StringSplitOptions.None);
+							f_name = fullName[0];
+							l_name = fullName[1];
+							checkAuthorQuery = $"IF EXISTS (SELECT id FROM author WHERE f_name='{f_name}' AND l_name='{l_name}') SELECT 1 ELSE SELECT 0";
+							authorId = (int)new SqlCommand(checkAuthorQuery, conn, tran).ExecuteScalar();
+
+							if (authorId == 0)
+							{
+								comAuthors = new SqlCommand("insert_author", conn, tran);
+								comAuthors.CommandType = CommandType.StoredProcedure;
+								SqlParameter authorsParam1 = comAuthors.Parameters.AddWithValue("f_name", SqlDbType.NVarChar);
+								authorsParam1.Value = f_name;
+								SqlParameter authorsParam2 = comAuthors.Parameters.AddWithValue("l_name", SqlDbType.NVarChar);
+								authorsParam2.Value = l_name;
+								authorId = (int)comAuthors.ExecuteScalar();
+							}
+							else
+							{
+								authorId = (int)new SqlCommand($"SELECT TOP(1) id from author WHERE f_name='{f_name}' AND l_name='{l_name}'", conn, tran).ExecuteScalar();
+							}
+							// Inserting author_book
+							comAuthorBook = new SqlCommand("insert_author_book", conn, tran);
+							comAuthorBook.CommandType = CommandType.StoredProcedure;
+							SqlParameter authorBookParam1 = comAuthorBook.Parameters.AddWithValue("author_id", SqlDbType.Int);
+							authorBookParam1.Value = authorId;
+
+							SqlParameter authorBookParam2 = comAuthorBook.Parameters.AddWithValue("book_id", SqlDbType.Int);
+							authorBookParam2.Value = bookId;
+							comAuthorBook.ExecuteNonQuery();
 						}
-						tran.Commit();
+						tran.Commit();	
 					}
 					catch (Exception ex)
 					{
