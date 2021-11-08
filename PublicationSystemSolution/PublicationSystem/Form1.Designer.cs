@@ -32,6 +32,7 @@ namespace PublicationSystem
 			this.dataGrid = new System.Windows.Forms.DataGridView();
 			this.getBooks = new System.Windows.Forms.Button();
 			this.addBookBtn = new System.Windows.Forms.Button();
+			this.editBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -40,6 +41,8 @@ namespace PublicationSystem
 			this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGrid.Location = new System.Drawing.Point(12, 76);
 			this.dataGrid.Name = "dataGrid";
+			this.dataGrid.ReadOnly = true;
+			this.dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGrid.Size = new System.Drawing.Size(765, 313);
 			this.dataGrid.TabIndex = 1;
 			// 
@@ -63,11 +66,22 @@ namespace PublicationSystem
 			this.addBookBtn.UseVisualStyleBackColor = true;
 			this.addBookBtn.Click += new System.EventHandler(this.addBookBtn_Click);
 			// 
+			// editBtn
+			// 
+			this.editBtn.Location = new System.Drawing.Point(109, 26);
+			this.editBtn.Name = "editBtn";
+			this.editBtn.Size = new System.Drawing.Size(75, 23);
+			this.editBtn.TabIndex = 4;
+			this.editBtn.Text = "Edit";
+			this.editBtn.UseVisualStyleBackColor = true;
+			this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.editBtn);
 			this.Controls.Add(this.addBookBtn);
 			this.Controls.Add(this.getBooks);
 			this.Controls.Add(this.dataGrid);
@@ -83,6 +97,7 @@ namespace PublicationSystem
 		private System.Windows.Forms.DataGridView dataGrid;
 		private System.Windows.Forms.Button getBooks;
 		private System.Windows.Forms.Button addBookBtn;
+		private System.Windows.Forms.Button editBtn;
 	}
 }
 

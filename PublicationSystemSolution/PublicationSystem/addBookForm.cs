@@ -22,7 +22,6 @@ namespace PublicationSystem
 
 		private void bRegButton_Click(object sender, EventArgs e)
 		{
-
 			string name = bNameInput.Text;
 			int pages = Int32.Parse(bPagesInput.Text);
 			string publisher = bPubInput.Text;
@@ -40,6 +39,7 @@ namespace PublicationSystem
 					{
 						int bookId;
 						int authorId = 0;
+
 						// Inserting publisher
 						int publisherId;
 						string checkPubQuery = $"SELECT ISNULL((SELECT id from publisher WHERE name='{publisher}'), 0)";
@@ -56,7 +56,7 @@ namespace PublicationSystem
 						}
 
 						// Inserting book
-						string checkBookQuery = $"IF EXISTS (SELECT id FROM book WHERE name='{name}') SELECT 1 ELSE SELECT 0";
+						string checkBookQuery = $"SELECT ISNULL((SELECT id from book WHERE name='{name}'), 0)";
 						bookId = (int)new SqlCommand(checkBookQuery, conn, tran).ExecuteScalar();
 
 						// This doesn't work need to check later
@@ -87,7 +87,7 @@ namespace PublicationSystem
 							string[] fullName = a.Split(new string[] { " " }, StringSplitOptions.None);
 							f_name = fullName[0];
 							l_name = fullName[1];
-							checkAuthorQuery = $"IF EXISTS (SELECT id FROM author WHERE f_name='{f_name}' AND l_name='{l_name}') SELECT 1 ELSE SELECT 0";
+							checkAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
 							authorId = (int)new SqlCommand(checkAuthorQuery, conn, tran).ExecuteScalar();
 
 							if (authorId == 0)
@@ -114,6 +114,8 @@ namespace PublicationSystem
 							authorBookParam2.Value = bookId;
 							comAuthorBook.ExecuteNonQuery();
 						}
+
+						
 						tran.Commit();	
 					}
 					catch (Exception ex)
@@ -125,6 +127,22 @@ namespace PublicationSystem
 			}
 		}
 
+		public void fillInputs(DataGridViewRow Row)
+		{
+			int cellIndex = 0;
+			for (int i = 0; i < this.Controls.Count; i++)
+			{
+				var input = this.Controls[i] as TextBox;
+				if (input != null)
+				{
+					MessageBox.Show(i.ToString());
+					input.Text = Row.Cells[cellIndex].Value.ToString();
+					cellIndex++;
+				}
+			}
+		}
+
+		// delete this
 		private void button1_Click(object sender, EventArgs e)
 		{
 			ArrayList authorsList = new ArrayList()
