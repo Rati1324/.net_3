@@ -29,20 +29,11 @@ namespace PublicationSystem
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new System.Windows.Forms.Button();
 			this.dataGrid = new System.Windows.Forms.DataGridView();
+			this.getBooks = new System.Windows.Forms.Button();
+			this.addBookBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(12, 12);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// dataGrid
 			// 
@@ -52,13 +43,34 @@ namespace PublicationSystem
 			this.dataGrid.Size = new System.Drawing.Size(765, 313);
 			this.dataGrid.TabIndex = 1;
 			// 
+			// getBooks
+			// 
+			this.getBooks.Location = new System.Drawing.Point(12, 26);
+			this.getBooks.Name = "getBooks";
+			this.getBooks.Size = new System.Drawing.Size(75, 23);
+			this.getBooks.TabIndex = 2;
+			this.getBooks.Text = "Get Books";
+			this.getBooks.UseVisualStyleBackColor = true;
+			this.getBooks.Click += new System.EventHandler(this.getBooks_Click);
+			// 
+			// addBookBtn
+			// 
+			this.addBookBtn.Location = new System.Drawing.Point(702, 26);
+			this.addBookBtn.Name = "addBookBtn";
+			this.addBookBtn.Size = new System.Drawing.Size(75, 23);
+			this.addBookBtn.TabIndex = 3;
+			this.addBookBtn.Text = "Add book";
+			this.addBookBtn.UseVisualStyleBackColor = true;
+			this.addBookBtn.Click += new System.EventHandler(this.addBookBtn_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.addBookBtn);
+			this.Controls.Add(this.getBooks);
 			this.Controls.Add(this.dataGrid);
-			this.Controls.Add(this.button1);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
@@ -68,8 +80,9 @@ namespace PublicationSystem
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.DataGridView dataGrid;
+		private System.Windows.Forms.Button getBooks;
+		private System.Windows.Forms.Button addBookBtn;
 	}
 }
 

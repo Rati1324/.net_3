@@ -17,12 +17,18 @@ namespace PublicationSystem
 			InitializeComponent();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void getBooks_Click(object sender, EventArgs e)
 		{
 			Book B = new Book();
 			B.GetInfo();
 			DataTable bookData = B.GetInfo();
 			dataGrid.DataSource = bookData;
+		}
+
+		private void addBookBtn_Click(object sender, EventArgs e)
+		{
+			addBookForm bookForm = new addBookForm();
+			bookForm.Show();
 		}
 	}
 }
