@@ -29,6 +29,7 @@ namespace PublicationSystem
 			bSaveButton.Hide();
 		}
 
+		// Register new book
 		private void bRegButton_Click(object sender, EventArgs e)
 		{
 			string name = bNameInput.Text;
@@ -133,31 +134,8 @@ namespace PublicationSystem
 				}
 			}
 		}
-		public void fillInputs(DataGridViewRow Row)
-		{
-			// name date pages pub authors 
-			bRegButton.Hide();
-			bSaveButton.Show();
 
-			bNameInput.Text = Row.Cells[0].Value.ToString();
-			Name = Row.Cells[0].Value.ToString();
-
-			bDateInput.Value = Convert.ToDateTime(Row.Cells[1].Value);
-			Date = Convert.ToDateTime(Row.Cells[1].Value);
-
-			bookId = Int32.Parse(Row.Cells[2].Value.ToString());
-
-			bPagesInput.Text = Row.Cells[3].Value.ToString();
-			bookPages = Int32.Parse(Row.Cells[3].Value.ToString());
-
-			bPubInput.Text = Row.Cells[4].Value.ToString();
-			Publisher = Row.Cells[4].Value.ToString();
-
-			string authors = Row.Cells[5].Value.ToString();
-			bAuthorsInput.Text = authors.Substring(0, authors.Length - 2);
-
-		}
-
+		// Update book
 		private void bSaveButton_Click(object sender, EventArgs e)
 		{
 			string query;
@@ -187,6 +165,7 @@ namespace PublicationSystem
 				string l_name;
 				string[] fullName;
 				string[] authorsList = bAuthorsInput.Text.Split(new string[] { ", " }, StringSplitOptions.None);
+
 				foreach (var a in authorsList)
 				{
 					fullName = a.Split(' ');
@@ -197,19 +176,52 @@ namespace PublicationSystem
 					authorId = DB.CheckAuthor(f_name, l_name, conn);
 
 					string query2 = $"SELECT ISNULL((SELECT 1 from author_book WHERE author_id=109 AND book_id=104), 0)";
-					int checkAuthorBook = (int)new SqlCommand(query2, conn).ExecuteNonQuery();
+					int checkAuthorBook = (int)new SqlCommand(query2, conn).ExecuteScalar();
 
-					MessageBox.Show(checkAuthorBook.ToString());
-					SqlCommand comAuthorBook = new SqlCommand("insert_author_book", conn);
-					comAuthorBook.CommandType = CommandType.StoredProcedure;
-					SqlParameter authorBookParam1 = comAuthorBook.Parameters.AddWithValue("author_id", SqlDbType.Int);
-					authorBookParam1.Value = authorId;
+					// Inserting into autho_book table, if authorId == 0 that means the author
+					// already exists so im not doing   
+					if (authorId == 0)
+					{
 
-					SqlParameter authorBookParam2 = comAuthorBook.Parameters.AddWithValue("book_id", SqlDbType.Int);
-					authorBookParam2.Value = bookId;
-					//comAuthorBook.ExecuteNonQuery();
+					}
+					else
+					{
+						SqlCommand comAuthorBook = new SqlCommand("insert_author_book", conn);
+						comAuthorBook.CommandType = CommandType.StoredProcedure;
+						SqlParameter authorBookParam1 = comAuthorBook.Parameters.AddWithValue("author_id", SqlDbType.Int);
+						authorBookParam1.Value = authorId;
+
+						SqlParameter authorBookParam2 = comAuthorBook.Parameters.AddWithValue("book_id", SqlDbType.Int);
+						authorBookParam2.Value = bookId;
+						comAuthorBook.ExecuteNonQuery();
+					}
 				}
 			}
 		}
+
+		// Fill inputs for update
+		public void fillInputs(DataGridViewRow Row)
+		{
+			// name date pages pub authors 
+			bRegButton.Hide();
+			bSaveButton.Show();
+
+			bNameInput.Text = Row.Cells[0].Value.ToString();
+			Name = Row.Cells[0].Value.ToString();
+
+			bDateInput.Value = Convert.ToDateTime(Row.Cells[1].Value);
+			Date = Convert.ToDateTime(Row.Cells[1].Value);
+
+			bookId = Int32.Parse(Row.Cells[2].Value.ToString());
+
+			bPagesInput.Text = Row.Cells[3].Value.ToString();
+			bookPages = Int32.Parse(Row.Cells[3].Value.ToString());
+
+			bPubInput.Text = Row.Cells[4].Value.ToString();
+			Publisher = Row.Cells[4].Value.ToString();
+
+			bAuthorsInput.Text = Row.Cells[5].Value.ToString();
+		}
+
 	}
 }

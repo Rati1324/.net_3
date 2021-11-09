@@ -48,10 +48,6 @@ namespace PublicationSystem
 					if (j == Authors.Rows.Count - 1) comma = "";
 					publicationData.Rows[i]["Authors"] += Authors.Rows[j]["f_name"] + " " + Authors.Rows[j]["l_name"] + comma;
 				}
-				//foreach (DataRow row in Authors.Rows)
-				//{
-				//	publicationData.Rows[i]["Authors"] += row["f_name"] + " " + row["l_name"] + ", ";
-				//}
 			}
 			return publicationData;
 		}
