@@ -19,7 +19,10 @@ namespace PublicationSystem
 		public Form1()
 		{
 			InitializeComponent();
-			//dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			searchBy.DropDownStyle = ComboBoxStyle.DropDownList;
+			searchBy.Items.Add("Date range");
+			searchBy.Items.Add("Top m");
+			searchBy.SelectedIndex = 0;
 		}
 
 		private void getBooks_Click(object sender, EventArgs e)
@@ -53,6 +56,27 @@ namespace PublicationSystem
 			SqlCommand com = new SqlCommand(query, conn);
 			com.Parameters.AddWithValue("@BookID", BookId);
 			com.ExecuteNonQuery();
+		}
+
+		private void searchBtn_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void searchBy_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (searchBy.SelectedIndex == 0)
+			{
+				datePicker1.Show();
+				datePicker2.Show();
+				searchBox.Hide();
+			}
+			else
+			{
+				searchBox.Show();
+				datePicker1.Hide();
+				datePicker2.Hide();
+			}
 		}
 	}
 }
