@@ -15,7 +15,7 @@ namespace PublicationSystem
 {
 	public partial class addBookForm : Form
 	{
-		public int Id;
+		public int bookId;
 		public string Name;
 		public string Authors;
 		public string Publisher;
@@ -144,22 +144,18 @@ namespace PublicationSystem
 
 			bDateInput.Value = Convert.ToDateTime(Row.Cells[1].Value);
 			Date = Convert.ToDateTime(Row.Cells[1].Value);
-			
+
+			bookId = Int32.Parse(Row.Cells[2].Value.ToString());
+
 			bPagesInput.Text = Row.Cells[3].Value.ToString();
 			bookPages = Int32.Parse(Row.Cells[3].Value.ToString());
 
 			bPubInput.Text = Row.Cells[4].Value.ToString();
 			Publisher = Row.Cells[4].Value.ToString();
 
-			bAuthorsInput.Text = Row.Cells[5].Value.ToString();
-			Authors = Row.Cells[5].Value.ToString();
+			string authors = Row.Cells[5].Value.ToString();
+			bAuthorsInput.Text = authors.Substring(0, authors.Length - 2);
 
-			//MessageBox.Show(Row.Cells[0].Value.ToString());
-			//MessageBox.Show(Row.Cells[1].Value.ToString());
-			//MessageBox.Show(Row.Cells[2].Value.ToString());
-			//MessageBox.Show(Row.Cells[3].Value.ToString());
-			//MessageBox.Show(Row.Cells[4].Value.ToString());
-			//MessageBox.Show(Row.Cells[5].Value.ToString());
 		}
 
 		private void bSaveButton_Click(object sender, EventArgs e)
@@ -186,22 +182,34 @@ namespace PublicationSystem
 
 			if (Authors != bAuthorsInput.Text)
 			{
+				int authorId;
 				string f_name;
 				string l_name;
 				string[] fullName;
 				string[] authorsList = bAuthorsInput.Text.Split(new string[] { ", " }, StringSplitOptions.None);
-
 				foreach (var a in authorsList)
 				{
 					fullName = a.Split(' ');
 					f_name = fullName[0];
 					l_name = fullName[1];
-					DB.CheckAuthor(f_name, l_name, conn);
+
+					// This inserts the author if exists, or returns the id
+					authorId = DB.CheckAuthor(f_name, l_name, conn);
+
+					string query2 = $"SELECT ISNULL((SELECT 1 from author_book WHERE author_id=109 AND book_id=104), 0)";
+					int checkAuthorBook = (int)new SqlCommand(query2, conn).ExecuteNonQuery();
+
+					MessageBox.Show(checkAuthorBook.ToString());
+					SqlCommand comAuthorBook = new SqlCommand("insert_author_book", conn);
+					comAuthorBook.CommandType = CommandType.StoredProcedure;
+					SqlParameter authorBookParam1 = comAuthorBook.Parameters.AddWithValue("author_id", SqlDbType.Int);
+					authorBookParam1.Value = authorId;
+
+					SqlParameter authorBookParam2 = comAuthorBook.Parameters.AddWithValue("book_id", SqlDbType.Int);
+					authorBookParam2.Value = bookId;
+					//comAuthorBook.ExecuteNonQuery();
 				}
-
 			}
-
-			
 		}
 	}
 }

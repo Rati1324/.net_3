@@ -10,7 +10,7 @@ namespace PublicationSystem
 {
 	class DB
 	{
-		public static void CheckAuthor(string f_name, string l_name, SqlConnection conn)
+		public static int CheckAuthor(string f_name, string l_name, SqlConnection conn)
 		{
 			string checkAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
 			int authorId = (int)new SqlCommand(checkAuthorQuery, conn).ExecuteScalar();
@@ -29,7 +29,7 @@ namespace PublicationSystem
 			{
 				authorId = (int)new SqlCommand($"SELECT TOP(1) id from author WHERE f_name='{f_name}' AND l_name='{l_name}'", conn).ExecuteScalar();
 			}
-
+			return authorId;
 		}
 	}
 }

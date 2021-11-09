@@ -12,7 +12,7 @@ namespace PublicationSystem
 		public int pages { set; get; }
 		public string publisher { set; get; }
 
-		// Mayeb useless?
+		// Maybe useless?
 		public DataTable GetAuthors(int bookId)
 		{
 			DataTable Authors = GetData($"select_authors {bookId}");
@@ -42,10 +42,16 @@ namespace PublicationSystem
 				publicationData.Rows[i]["Pages"] = bookData.Rows[i]["Pages"];
 				publicationData.Rows[i]["Publisher name"] = bookData.Rows[i]["Publisher name"];
 
-				foreach (DataRow row in Authors.Rows)
+				string comma = ", ";
+				for (int j = 0; j < Authors.Rows.Count; j++)
 				{
-					publicationData.Rows[i]["Authors"] += row["f_name"] + " " + row["l_name"] + ", ";
+					if (j == Authors.Rows.Count - 1) comma = "";
+					publicationData.Rows[i]["Authors"] += Authors.Rows[j]["f_name"] + " " + Authors.Rows[j]["l_name"] + comma;
 				}
+				//foreach (DataRow row in Authors.Rows)
+				//{
+				//	publicationData.Rows[i]["Authors"] += row["f_name"] + " " + row["l_name"] + ", ";
+				//}
 			}
 			return publicationData;
 		}
