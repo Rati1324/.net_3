@@ -33,6 +33,7 @@ namespace PublicationSystem
 			this.getBooks = new System.Windows.Forms.Button();
 			this.addBookBtn = new System.Windows.Forms.Button();
 			this.editBtn = new System.Windows.Forms.Button();
+			this.bDeleteBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -76,11 +77,22 @@ namespace PublicationSystem
 			this.editBtn.UseVisualStyleBackColor = true;
 			this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
 			// 
+			// bDeleteBtn
+			// 
+			this.bDeleteBtn.Location = new System.Drawing.Point(211, 26);
+			this.bDeleteBtn.Name = "bDeleteBtn";
+			this.bDeleteBtn.Size = new System.Drawing.Size(75, 23);
+			this.bDeleteBtn.TabIndex = 5;
+			this.bDeleteBtn.Text = "Delete";
+			this.bDeleteBtn.UseVisualStyleBackColor = true;
+			this.bDeleteBtn.Click += new System.EventHandler(this.bDeleteBtn_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.bDeleteBtn);
 			this.Controls.Add(this.editBtn);
 			this.Controls.Add(this.addBookBtn);
 			this.Controls.Add(this.getBooks);
@@ -98,6 +110,7 @@ namespace PublicationSystem
 		private System.Windows.Forms.Button getBooks;
 		private System.Windows.Forms.Button addBookBtn;
 		private System.Windows.Forms.Button editBtn;
+		private System.Windows.Forms.Button bDeleteBtn;
 	}
 }
 

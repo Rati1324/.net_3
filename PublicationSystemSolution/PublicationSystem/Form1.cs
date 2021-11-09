@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,7 @@ namespace PublicationSystem
 {
 	public partial class Form1 : Form
 	{
+		public SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
 		public Form1()
 		{
 			InitializeComponent();
@@ -40,6 +43,16 @@ namespace PublicationSystem
 			addBookForm bookForm = new addBookForm();
 			bookForm.fillInputs(Row);
 			bookForm.Show();
+		}
+
+		private void bDeleteBtn_Click(object sender, EventArgs e)
+		{
+			conn.Open();
+			int BookId = Int32.Parse(dataGrid.SelectedRows[0].Cells[2].Value.ToString());
+			string query = $"DELETE FROM author_book WHERE book_id={BookId}; DELETE FROM book WHERE id={BookId}";
+			SqlCommand com = new SqlCommand(query, conn);
+			com.Parameters.AddWithValue("@BookID", BookId);
+			com.ExecuteNonQuery();
 		}
 	}
 }

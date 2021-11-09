@@ -178,11 +178,11 @@ namespace PublicationSystem
 					string query2 = $"SELECT ISNULL((SELECT 1 from author_book WHERE author_id=109 AND book_id=104), 0)";
 					int checkAuthorBook = (int)new SqlCommand(query2, conn).ExecuteScalar();
 
-					// Inserting into autho_book table, if authorId == 0 that means the author
-					// already exists so im not doing   
+					// Inserting into autho_book table
+					// if authorId == 0 that means the author already exists so im not doing   
 					if (authorId == 0)
 					{
-
+						// maybe add deletion later
 					}
 					else
 					{
