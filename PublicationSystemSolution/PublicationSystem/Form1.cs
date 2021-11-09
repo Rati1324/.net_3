@@ -25,6 +25,7 @@ namespace PublicationSystem
 			B.GetInfo();
 			DataTable bookData = B.GetInfo();
 			dataGrid.DataSource = bookData;
+			dataGrid.Columns["id"].Visible = false;
 		}
 
 		private void addBookBtn_Click(object sender, EventArgs e)
@@ -35,14 +36,10 @@ namespace PublicationSystem
 
 		private void editBtn_Click(object sender, EventArgs e)
 		{
-			int index = dataGrid.SelectedRows[0].Index;
-			MessageBox.Show(index.ToString());
-			DataGridViewRow Row = dataGrid.Rows[0];
-
+			DataGridViewRow Row = dataGrid.SelectedRows[0];
 			addBookForm bookForm = new addBookForm();
 			bookForm.fillInputs(Row);
 			bookForm.Show();
-			
 		}
 	}
 }

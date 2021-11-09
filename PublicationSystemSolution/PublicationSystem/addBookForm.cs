@@ -15,9 +15,18 @@ namespace PublicationSystem
 {
 	public partial class addBookForm : Form
 	{
+		public int Id;
+		public string Name;
+		public string Authors;
+		public string Publisher;
+		public DateTime Date;
+		public int bookPages;
+		public SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
+
 		public addBookForm()
 		{
 			InitializeComponent();
+			bSaveButton.Hide();
 		}
 
 		private void bRegButton_Click(object sender, EventArgs e)
@@ -29,7 +38,7 @@ namespace PublicationSystem
 
 			string authorsString = bAuthorsInput.Text;
 			string[] authorsList = authorsString.Split(new string[] { ", " }, StringSplitOptions.None);
-			// Checking for already existing rows is stupid??
+
 			using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString))
 			{
 				conn.Open();
@@ -114,8 +123,6 @@ namespace PublicationSystem
 							authorBookParam2.Value = bookId;
 							comAuthorBook.ExecuteNonQuery();
 						}
-
-						
 						tran.Commit();	
 					}
 					catch (Exception ex)
@@ -126,30 +133,75 @@ namespace PublicationSystem
 				}
 			}
 		}
-
 		public void fillInputs(DataGridViewRow Row)
 		{
-			int cellIndex = 0;
-			for (int i = 0; i < this.Controls.Count; i++)
-			{
-				var input = this.Controls[i] as TextBox;
-				if (input != null)
-				{
-					MessageBox.Show(i.ToString());
-					input.Text = Row.Cells[cellIndex].Value.ToString();
-					cellIndex++;
-				}
-			}
+			// name date pages pub authors 
+			bRegButton.Hide();
+			bSaveButton.Show();
+
+			bNameInput.Text = Row.Cells[0].Value.ToString();
+			Name = Row.Cells[0].Value.ToString();
+
+			bDateInput.Value = Convert.ToDateTime(Row.Cells[1].Value);
+			Date = Convert.ToDateTime(Row.Cells[1].Value);
+			
+			bPagesInput.Text = Row.Cells[3].Value.ToString();
+			bookPages = Int32.Parse(Row.Cells[3].Value.ToString());
+
+			bPubInput.Text = Row.Cells[4].Value.ToString();
+			Publisher = Row.Cells[4].Value.ToString();
+
+			bAuthorsInput.Text = Row.Cells[5].Value.ToString();
+			Authors = Row.Cells[5].Value.ToString();
+
+			//MessageBox.Show(Row.Cells[0].Value.ToString());
+			//MessageBox.Show(Row.Cells[1].Value.ToString());
+			//MessageBox.Show(Row.Cells[2].Value.ToString());
+			//MessageBox.Show(Row.Cells[3].Value.ToString());
+			//MessageBox.Show(Row.Cells[4].Value.ToString());
+			//MessageBox.Show(Row.Cells[5].Value.ToString());
 		}
 
-		// delete this
-		private void button1_Click(object sender, EventArgs e)
+		private void bSaveButton_Click(object sender, EventArgs e)
 		{
-			ArrayList authorsList = new ArrayList()
+			string query;
+			// put this in try except
+			conn.Open();
+			if (Name != bNameInput.Text)
 			{
-				new string[] { "Nick", "Nickson" },
-				new string[] { "mari2", "maridze" }
-			};
+				try
+				{
+					query = $"UPDATE book SET name=@newName WHERE name=@oldName";
+					SqlCommand com = new SqlCommand(query, conn);
+					com.Parameters.AddWithValue("newName", bNameInput.Text);
+					com.Parameters.AddWithValue("oldName", Name);
+					com.ExecuteNonQuery();
+					com.Dispose();
+				}
+				catch (Exception ex)
+				{
+					throw new Exception(ex.Message);
+				}
+			}
+
+			if (Authors != bAuthorsInput.Text)
+			{
+				string f_name;
+				string l_name;
+				string[] fullName;
+				string[] authorsList = bAuthorsInput.Text.Split(new string[] { ", " }, StringSplitOptions.None);
+
+				foreach (var a in authorsList)
+				{
+					fullName = a.Split(' ');
+					f_name = fullName[0];
+					l_name = fullName[1];
+					DB.CheckAuthor(f_name, l_name, conn);
+				}
+
+			}
+
+			
 		}
 	}
 }

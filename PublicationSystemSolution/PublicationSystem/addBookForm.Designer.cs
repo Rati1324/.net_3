@@ -41,7 +41,7 @@ namespace PublicationSystem
 			this.bPagesInput = new System.Windows.Forms.TextBox();
 			this.Pages = new System.Windows.Forms.Label();
 			this.bRegButton = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
+			this.bSaveButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// bNameInput
@@ -143,22 +143,22 @@ namespace PublicationSystem
 			this.bRegButton.UseVisualStyleBackColor = true;
 			this.bRegButton.Click += new System.EventHandler(this.bRegButton_Click);
 			// 
-			// button1
+			// bSaveButton
 			// 
-			this.button1.Location = new System.Drawing.Point(450, 333);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 4;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.bSaveButton.Location = new System.Drawing.Point(246, 247);
+			this.bSaveButton.Name = "bSaveButton";
+			this.bSaveButton.Size = new System.Drawing.Size(75, 23);
+			this.bSaveButton.TabIndex = 4;
+			this.bSaveButton.Text = "Save changes";
+			this.bSaveButton.UseVisualStyleBackColor = true;
+			this.bSaveButton.Click += new System.EventHandler(this.bSaveButton_Click);
 			// 
 			// addBookForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.bSaveButton);
 			this.Controls.Add(this.bRegButton);
 			this.Controls.Add(this.bDateInput);
 			this.Controls.Add(this.label3);
@@ -192,6 +192,6 @@ namespace PublicationSystem
 		private System.Windows.Forms.TextBox bPagesInput;
 		private System.Windows.Forms.Label Pages;
 		private System.Windows.Forms.Button bRegButton;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button bSaveButton;
 	}
 }

@@ -12,6 +12,7 @@ namespace PublicationSystem
 		public int pages { set; get; }
 		public string publisher { set; get; }
 
+		// Mayeb useless?
 		public DataTable GetAuthors(int bookId)
 		{
 			DataTable Authors = GetData($"select_authors {bookId}");
@@ -23,18 +24,21 @@ namespace PublicationSystem
 			// Use parameterized procedures
 			DataTable publicationData = base.GetInfo();
 			DataTable bookData = base.GetData("select_book");
+			DataTable Authors;
 		
-			for (int i = 1; i < bookData.Columns.Count; i++)
+			// This is for columns names
+			for (int i = 0; i < bookData.Columns.Count; i++)
 			{
 				publicationData.Columns.Add(bookData.Columns[i].ColumnName);
 			}
 			publicationData.Columns.Add("Authors");
 
-			DataTable Authors;
+			// This is for the row of each book
 			for (int i = 0; i < publicationData.Rows.Count; i++)
 			{
-				Authors = GetAuthors((int)bookData.Rows[i]["id"]);
+				Authors = GetData($"select_authors {(int)bookData.Rows[i]["id"]}");
 
+				publicationData.Rows[i]["id"] = bookData.Rows[i]["id"]; 
 				publicationData.Rows[i]["Pages"] = bookData.Rows[i]["Pages"];
 				publicationData.Rows[i]["Publisher name"] = bookData.Rows[i]["Publisher name"];
 

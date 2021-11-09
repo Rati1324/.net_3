@@ -60,6 +60,7 @@
       <DependentUpon>addBookForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Book.cs" />
+    <Compile Include="DB.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
