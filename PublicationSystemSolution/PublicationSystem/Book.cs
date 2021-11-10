@@ -12,18 +12,11 @@ namespace PublicationSystem
 		public int pages { set; get; }
 		public string publisher { set; get; }
 
-		// Maybe useless?
-		public DataTable GetAuthors(int bookId)
-		{
-			DataTable Authors = GetData($"select_authors {bookId}");
-			return Authors;
-		}
-
 		public override DataTable GetInfo()
 		{
 			// Use parameterized procedures
 			DataTable publicationData = base.GetInfo();
-			DataTable bookData = base.GetData("select_book");
+			DataTable bookData = DB.GetData("select_book");
 			DataTable Authors;
 		
 			// This is for columns names
@@ -36,7 +29,7 @@ namespace PublicationSystem
 			// This is for the row of each book
 			for (int i = 0; i < publicationData.Rows.Count; i++)
 			{
-				Authors = GetData($"select_authors {(int)bookData.Rows[i]["id"]}");
+				Authors = DB.GetData($"select_authors {(int)bookData.Rows[i]["id"]}");
 
 				publicationData.Rows[i]["id"] = bookData.Rows[i]["id"]; 
 				publicationData.Rows[i]["Pages"] = bookData.Rows[i]["Pages"];

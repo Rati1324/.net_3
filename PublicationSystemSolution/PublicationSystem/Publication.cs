@@ -16,31 +16,10 @@ namespace PublicationSystem
 		public DateTime Date { set; get; }
 		public ArrayList Authors { set; get; }
 
-		public DataTable GetData(string query)
-		{
-			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
-			{
-				using (SqlCommand com = new SqlCommand(query, conn))
-				{
-					try
-					{
-						conn.Open();
-						SqlDataReader sdr = com.ExecuteReader();
-						DataTable dt = new DataTable();
-						dt.Load(sdr);
-						return dt;
-					}
-					catch (Exception ex)
-					{
-						throw new Exception($"error {ex}");
-					}
-				}
-			}
-		}
 		public virtual DataTable GetInfo()
 		{
 			DataTable Data; 
-			Data = GetData("SELECT name 'Name', pub_date 'Date' FROM book");
+			Data = DB.GetData("SELECT name 'Name', pub_date 'Date' FROM book");
 			return Data;
 		}
 	}

@@ -60,7 +60,12 @@ namespace PublicationSystem
 
 		private void searchBtn_Click(object sender, EventArgs e)
 		{
-
+			if (searchBy.SelectedIndex == 0)
+			{
+				string from = datePicker1.Value.ToString("yyyy-MM-dd");
+				string to = datePicker2.Value.ToString("yyyy-MM-dd");
+				string query = $"SELECT * FROM BOOK WHERE pub_date<'{from}' AND pub_date>'{to}'";
+			}
 		}
 
 		private void searchBy_SelectedIndexChanged(object sender, EventArgs e)

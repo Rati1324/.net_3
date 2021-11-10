@@ -173,7 +173,7 @@ namespace PublicationSystem
 					l_name = fullName[1];
 
 					// This inserts the author if exists, or returns the id
-					authorId = DB.CheckAuthor(f_name, l_name, conn);
+					authorId = DB.CheckAuthor(f_name, l_name);
 
 					string query2 = $"SELECT ISNULL((SELECT 1 from author_book WHERE author_id=109 AND book_id=104), 0)";
 					int checkAuthorBook = (int)new SqlCommand(query2, conn).ExecuteScalar();
