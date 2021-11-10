@@ -151,7 +151,6 @@ namespace PublicationSystem
 		private void bSaveButton_Click(object sender, EventArgs e)
 		{
 			string query;
-			// put this in try except
 			conn.Open();
 			if (Name != bNameInput.Text)
 			{
