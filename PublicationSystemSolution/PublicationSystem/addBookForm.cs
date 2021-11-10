@@ -62,30 +62,36 @@ namespace PublicationSystem
 						}
 						else
 						{
-							publisherId = (int) new SqlCommand($"insert_publisher '{publisher}'", conn, tran).ExecuteScalar();
+							SqlCommand comPub = new SqlCommand("insert_publisher", conn, tran);
+							comPub.CommandType = CommandType.StoredProcedure;
+							SqlParameter pubParam1 = comPub.Parameters.Add("@name", SqlDbType.NVarChar);
+							pubParam1.Value = publisher;
+							publisherId = (int)comPub.ExecuteScalar();
 						}
 
 						// Inserting book
 						string checkBookQuery = $"SELECT ISNULL((SELECT id from book WHERE name='{name}'), 0)";
 						bookId = (int)new SqlCommand(checkBookQuery, conn, tran).ExecuteScalar();
 
-						// This doesn't work need to check later
 						if (bookId > 0)
 						{
 							bookId = (int)new SqlCommand($"SELECT TOP(1) id from book WHERE name='{name}'", conn, tran).ExecuteScalar();
+							MessageBox.Show("asd");
 						}
-
-						SqlCommand comBook = new SqlCommand("insert_book", conn, tran);
-						comBook.CommandType = CommandType.StoredProcedure;
-						SqlParameter bookParam1 = comBook.Parameters.Add("@name", SqlDbType.NVarChar);
-						bookParam1.Value = name;
-						SqlParameter bookParam2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
-						bookParam2.Value = pages;
-						SqlParameter bookParam3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
-						bookParam3.Value = publisherId;
-						SqlParameter bookParam4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
-						bookParam4.Value = date;
-						bookId = (int)comBook.ExecuteScalar();
+						else
+						{
+							SqlCommand comBook = new SqlCommand("insert_book", conn, tran);
+							comBook.CommandType = CommandType.StoredProcedure;
+							SqlParameter bookParam1 = comBook.Parameters.Add("@name", SqlDbType.NVarChar);
+							bookParam1.Value = name;
+							SqlParameter bookParam2 = comBook.Parameters.Add("@pages", SqlDbType.Int);
+							bookParam2.Value = pages;
+							SqlParameter bookParam3 = comBook.Parameters.Add("@publisher_id", SqlDbType.Int);
+							bookParam3.Value = publisherId;
+							SqlParameter bookParam4 = comBook.Parameters.Add("@pub_date", SqlDbType.Date);
+							bookParam4.Value = date;
+							bookId = (int)comBook.ExecuteScalar();
+						}
 
 						// Inserting author
 						SqlCommand comAuthors;

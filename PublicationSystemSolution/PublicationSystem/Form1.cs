@@ -28,7 +28,6 @@ namespace PublicationSystem
 		private void getBooks_Click(object sender, EventArgs e)
 		{
 			Book B = new Book();
-			B.GetInfo();
 			DataTable bookData = B.GetInfo();
 			dataGrid.DataSource = bookData;
 			dataGrid.Columns["id"].Visible = false;
