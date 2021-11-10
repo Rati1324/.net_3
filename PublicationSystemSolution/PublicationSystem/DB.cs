@@ -14,12 +14,11 @@ namespace PublicationSystem
 		public static int InsertAuthor(string f_name, string l_name)
 		{
 			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
+			conn.Open();
 			string InsertAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
-			// This inserts a new author if, or returns  
 			int authorId = (int)new SqlCommand(InsertAuthorQuery, conn).ExecuteScalar();
 			if (authorId == 0)
 			{
-				conn.Open();
 				SqlCommand comAuthors = new SqlCommand("insert_author", conn);
 				comAuthors.CommandType = CommandType.StoredProcedure;
 				SqlParameter authorsParam1 = comAuthors.Parameters.AddWithValue("f_name", SqlDbType.NVarChar);

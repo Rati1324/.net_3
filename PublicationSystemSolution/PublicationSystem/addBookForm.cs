@@ -76,7 +76,7 @@ namespace PublicationSystem
 						if (bookId > 0)
 						{
 							bookId = (int)new SqlCommand($"SELECT TOP(1) id from book WHERE name='{name}'", conn, tran).ExecuteScalar();
-							MessageBox.Show("asd");
+							MessageBox.Show("Book already exists");
 						}
 						else
 						{
@@ -103,23 +103,7 @@ namespace PublicationSystem
 							string[] fullName = a.Split(new string[] { " " }, StringSplitOptions.None);
 							f_name = fullName[0];
 							l_name = fullName[1];
-							InsertAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
-							authorId = (int)new SqlCommand(InsertAuthorQuery, conn, tran).ExecuteScalar();
-
-							if (authorId == 0)
-							{
-								comAuthors = new SqlCommand("insert_author", conn, tran);
-								comAuthors.CommandType = CommandType.StoredProcedure;
-								SqlParameter authorsParam1 = comAuthors.Parameters.AddWithValue("f_name", SqlDbType.NVarChar);
-								authorsParam1.Value = f_name;
-								SqlParameter authorsParam2 = comAuthors.Parameters.AddWithValue("l_name", SqlDbType.NVarChar);
-								authorsParam2.Value = l_name;
-								authorId = (int)comAuthors.ExecuteScalar();
-							}
-							else
-							{
-								authorId = (int)new SqlCommand($"SELECT TOP(1) id from author WHERE f_name='{f_name}' AND l_name='{l_name}'", conn, tran).ExecuteScalar();
-							}
+							authorId = DB.InsertAuthor(f_name, l_name);
 							// Inserting author_book
 							comAuthorBook = new SqlCommand("insert_author_book", conn, tran);
 							comAuthorBook.CommandType = CommandType.StoredProcedure;
