@@ -16,7 +16,7 @@ namespace PublicationSystem
 		{
 			// Use parameterized procedures
 			DataTable publicationData = base.GetInfo();
-			DataTable bookData = DB.GetData("select_book");
+			DataTable bookData = DB.SelectData("select_book");
 			DataTable Authors;
 		
 			// This is for columns names
@@ -29,7 +29,7 @@ namespace PublicationSystem
 			// This is for the row of each book
 			for (int i = 0; i < publicationData.Rows.Count; i++)
 			{
-				Authors = DB.GetData($"select_authors {(int)bookData.Rows[i]["id"]}");
+				Authors = DB.SelectData($"select_authors {(int)bookData.Rows[i]["id"]}");
 
 				publicationData.Rows[i]["id"] = bookData.Rows[i]["id"]; 
 				publicationData.Rows[i]["Pages"] = bookData.Rows[i]["Pages"];

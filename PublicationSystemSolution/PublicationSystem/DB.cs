@@ -11,12 +11,12 @@ namespace PublicationSystem
 {
 	class DB
 	{
-		public static int CheckAuthor(string f_name, string l_name)
+		public static int InsertAuthor(string f_name, string l_name)
 		{
 			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
-			string checkAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
+			string InsertAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
 			// This inserts a new author if, or returns  
-			int authorId = (int)new SqlCommand(checkAuthorQuery, conn).ExecuteScalar();
+			int authorId = (int)new SqlCommand(InsertAuthorQuery, conn).ExecuteScalar();
 			if (authorId == 0)
 			{
 				conn.Open();
@@ -34,7 +34,7 @@ namespace PublicationSystem
 			}
 			return authorId;
 		}
-		public static DataTable GetData(string query)
+		public static DataTable SelectData(string query)
 		{
 			using SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDb"].ConnectionString);
 			using SqlCommand com = new SqlCommand(query, conn);

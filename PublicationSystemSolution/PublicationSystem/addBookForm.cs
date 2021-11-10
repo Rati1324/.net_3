@@ -90,15 +90,15 @@ namespace PublicationSystem
 						// Inserting author
 						SqlCommand comAuthors;
 						SqlCommand comAuthorBook;
-						string checkAuthorQuery;
+						string InsertAuthorQuery;
 						string f_name, l_name;
 						foreach (string a in authorsList)
 						{
 							string[] fullName = a.Split(new string[] { " " }, StringSplitOptions.None);
 							f_name = fullName[0];
 							l_name = fullName[1];
-							checkAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
-							authorId = (int)new SqlCommand(checkAuthorQuery, conn, tran).ExecuteScalar();
+							InsertAuthorQuery = $"SELECT ISNULL((SELECT id from author WHERE f_name='{f_name}' AND l_name='{l_name}'), 0)";
+							authorId = (int)new SqlCommand(InsertAuthorQuery, conn, tran).ExecuteScalar();
 
 							if (authorId == 0)
 							{
@@ -173,10 +173,10 @@ namespace PublicationSystem
 					l_name = fullName[1];
 
 					// This inserts the author if exists, or returns the id
-					authorId = DB.CheckAuthor(f_name, l_name);
+					authorId = DB.InsertAuthor(f_name, l_name);
 
 					string query2 = $"SELECT ISNULL((SELECT 1 from author_book WHERE author_id=109 AND book_id=104), 0)";
-					int checkAuthorBook = (int)new SqlCommand(query2, conn).ExecuteScalar();
+					int InsertAuthorBook = (int)new SqlCommand(query2, conn).ExecuteScalar();
 
 					// Inserting into autho_book table
 					// if authorId == 0 that means the author already exists so im not doing   

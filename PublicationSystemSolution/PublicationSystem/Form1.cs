@@ -64,7 +64,18 @@ namespace PublicationSystem
 			{
 				string from = datePicker1.Value.ToString("yyyy-MM-dd");
 				string to = datePicker2.Value.ToString("yyyy-MM-dd");
-				string query = $"SELECT * FROM BOOK WHERE pub_date<'{from}' AND pub_date>'{to}'";
+				string query = $"SELECT * FROM book WHERE pub_date>'{from}' AND pub_date<'{to}'";
+				DataTable data = DB.SelectData(query);
+				dataGrid.DataSource = data;
+				dataGrid.Columns["id"].Visible = false;
+			}
+			else if (searchBy.SelectedIndex == 1)
+			{
+				int num = Int32.Parse(searchBox.Text);
+				string query = $"SELECT TOP({num}) * FROM book ORDER BY pages DESC";
+				DataTable data = DB.SelectData(query);
+				dataGrid.DataSource = data;
+				dataGrid.Columns["id"].Visible = false;
 			}
 		}
 

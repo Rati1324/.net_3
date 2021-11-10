@@ -19,7 +19,7 @@ namespace PublicationSystem
 		public virtual DataTable GetInfo()
 		{
 			DataTable Data; 
-			Data = DB.GetData("SELECT name 'Name', pub_date 'Date' FROM book");
+			Data = DB.SelectData("SELECT name 'Name', pub_date 'Date' FROM book");
 			return Data;
 		}
 	}
