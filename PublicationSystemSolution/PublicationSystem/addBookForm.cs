@@ -94,9 +94,7 @@ namespace PublicationSystem
 						}
 
 						// Inserting author
-						SqlCommand comAuthors;
 						SqlCommand comAuthorBook;
-						string InsertAuthorQuery;
 						string f_name, l_name;
 						foreach (string a in authorsList)
 						{
@@ -123,6 +121,30 @@ namespace PublicationSystem
 					}
 				}
 			}
+		}
+
+		// Fill inputs for update
+		public void fillInputs(DataGridViewRow Row)
+		{
+			// name date pages pub authors 
+			bRegButton.Hide();
+			bSaveButton.Show();
+
+			bNameInput.Text = Row.Cells[0].Value.ToString();
+			Name = Row.Cells[0].Value.ToString();
+
+			bDateInput.Value = Convert.ToDateTime(Row.Cells[1].Value);
+			Date = Convert.ToDateTime(Row.Cells[1].Value);
+
+			bookId = Int32.Parse(Row.Cells[2].Value.ToString());
+
+			bPagesInput.Text = Row.Cells[3].Value.ToString();
+			bookPages = Int32.Parse(Row.Cells[3].Value.ToString());
+
+			bPubInput.Text = Row.Cells[4].Value.ToString();
+			Publisher = Row.Cells[4].Value.ToString();
+
+			bAuthorsInput.Text = Row.Cells[5].Value.ToString();
 		}
 
 		// Update book
@@ -188,30 +210,5 @@ namespace PublicationSystem
 				}
 			}
 		}
-
-		// Fill inputs for update
-		public void fillInputs(DataGridViewRow Row)
-		{
-			// name date pages pub authors 
-			bRegButton.Hide();
-			bSaveButton.Show();
-
-			bNameInput.Text = Row.Cells[0].Value.ToString();
-			Name = Row.Cells[0].Value.ToString();
-
-			bDateInput.Value = Convert.ToDateTime(Row.Cells[1].Value);
-			Date = Convert.ToDateTime(Row.Cells[1].Value);
-
-			bookId = Int32.Parse(Row.Cells[2].Value.ToString());
-
-			bPagesInput.Text = Row.Cells[3].Value.ToString();
-			bookPages = Int32.Parse(Row.Cells[3].Value.ToString());
-
-			bPubInput.Text = Row.Cells[4].Value.ToString();
-			Publisher = Row.Cells[4].Value.ToString();
-
-			bAuthorsInput.Text = Row.Cells[5].Value.ToString();
-		}
-
 	}
 }

@@ -51,7 +51,7 @@ namespace PublicationSystem
 		{
 			conn.Open();
 			int BookId = Int32.Parse(dataGrid.SelectedRows[0].Cells[2].Value.ToString());
-			string query = $"DELETE FROM author_book WHERE book_id={BookId}; DELETE FROM book WHERE id={BookId}";
+			string query = $"DELETE FROM author_book WHERE book_id=@BookId; DELETE FROM book WHERE id=@BookId";
 			SqlCommand com = new SqlCommand(query, conn);
 			com.Parameters.AddWithValue("@BookID", BookId);
 			com.ExecuteNonQuery();
