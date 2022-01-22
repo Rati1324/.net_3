@@ -15,11 +15,8 @@ namespace CarRental
     public partial class Staff
     {
         public int id { get; set; }
-        public Nullable<int> role { get; set; }
         public Nullable<int> branch { get; set; }
     
-        public virtual Branch Branch1 { get; set; }
-        public virtual Role Role1 { get; set; }
         public virtual User User { get; set; }
     }
 }

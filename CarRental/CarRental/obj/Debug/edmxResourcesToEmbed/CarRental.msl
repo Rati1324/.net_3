@@ -91,19 +91,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="CarRentalModel.Role">
-        <MappingFragment StoreEntitySet="Role">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Staffs">
       <EntityTypeMapping TypeName="CarRentalModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="role" ColumnName="role" />
           <ScalarProperty Name="branch" ColumnName="branch" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -130,6 +121,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="CarRentalModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="f_name" ColumnName="f_name" />
           <ScalarProperty Name="l_name" ColumnName="l_name" />
@@ -139,6 +131,14 @@
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="dob" ColumnName="dob" />
           <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="CarRentalModel.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

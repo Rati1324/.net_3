@@ -37,7 +37,6 @@
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="year" Type="int" />
     <Property Name="power_hp" Type="int" />
-    <Property Name="power_kw" Type="int" />
     <Property Name="transmission_type" Type="int" />
     <Property Name="fuel_type" Type="int" />
     <Property Name="body_type" Type="int" />
@@ -82,19 +81,11 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Role">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" MaxLength="20" />
-  </EntityType>
   <EntityType Name="Staff">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="role" Type="int" />
     <Property Name="branch" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -111,7 +102,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="User">
@@ -127,6 +118,14 @@
     <Property Name="password" Type="varchar" MaxLength="150" />
     <Property Name="dob" Type="date" />
     <Property Name="address" Type="int" />
+    <Property Name="type" Type="int" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Address_City">
     <End Role="City" Type="Self.City" Multiplicity="0..1" />
@@ -248,30 +247,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_staff_branch">
-    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
-    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Branch">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Staff">
-        <PropertyRef Name="role" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_staff_role">
-    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Role">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Staff">
-        <PropertyRef Name="role" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Staff_User1">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
@@ -296,6 +271,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CarRentalModelStoreContainer">
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
@@ -306,11 +293,11 @@
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FuelType" EntityType="Self.FuelType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransmissionType" EntityType="Self.TransmissionType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
       <End Role="City" EntitySet="City" />
       <End Role="Address" EntitySet="Address" />
@@ -351,20 +338,16 @@
       <End Role="User" EntitySet="User" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
-    <AssociationSet Name="FK_staff_branch" Association="Self.FK_staff_branch">
-      <End Role="Branch" EntitySet="Branch" />
-      <End Role="Staff" EntitySet="Staff" />
-    </AssociationSet>
-    <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
-      <End Role="Role" EntitySet="Role" />
-      <End Role="Staff" EntitySet="Staff" />
-    </AssociationSet>
     <AssociationSet Name="FK_Staff_User1" Association="Self.FK_Staff_User1">
       <End Role="User" EntitySet="User" />
       <End Role="Staff" EntitySet="Staff" />
     </AssociationSet>
     <AssociationSet Name="FK_user_address" Association="Self.FK_user_address">
       <End Role="Address" EntitySet="Address" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserType" />
       <End Role="User" EntitySet="User" />
     </AssociationSet>
   </EntityContainer>

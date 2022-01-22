@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,52 +71,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Booking.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Branch.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Car.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CarBodyType.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CarRental.Context.cs">
+    <Compile Include="CarRentalModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarRental.Context.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CarRental.cs">
+    <Compile Include="CarRentalModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CarRental.Designer.cs">
+    <Compile Include="CarRentalModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarRental.edmx</DependentUpon>
+      <DependentUpon>CarRentalModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="City.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FuelType.cs">
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HomePageForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HomePageForm.Designer.cs">
       <DependentUpon>HomePageForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FuelType.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -111,20 +126,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Role.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
-    </Compile>
     <Compile Include="Staff.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TransmissionType.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>CarRental.tt</DependentUpon>
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserType.cs">
+      <DependentUpon>CarRentalModel.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="HomePageForm.resx">
       <DependentUpon>HomePageForm.cs</DependentUpon>
@@ -141,12 +156,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EntityDeploy Include="CarRental.edmx">
+    <EntityDeploy Include="CarRentalModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarRental.Designer.cs</LastGenOutput>
+      <LastGenOutput>CarRentalModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CarRental.edmx.diagram">
-      <DependentUpon>CarRental.edmx</DependentUpon>
+    <None Include="CarRentalModel.edmx.diagram">
+      <DependentUpon>CarRentalModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -163,19 +178,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CarRental.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CarRental.Context.cs</LastGenOutput>
-      <DependentUpon>CarRental.edmx</DependentUpon>
-    </Content>
-    <Content Include="CarRental.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarRental.edmx</DependentUpon>
-      <LastGenOutput>CarRental.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CarRentalModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarRentalModel.edmx</DependentUpon>
+      <LastGenOutput>CarRentalModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CarRentalModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarRentalModel.edmx</DependentUpon>
+      <LastGenOutput>CarRentalModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

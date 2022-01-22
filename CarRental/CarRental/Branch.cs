@@ -17,8 +17,7 @@ namespace CarRental
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Branch()
         {
-            this.Cars = new HashSet<Car>();
-            this.Staffs = new HashSet<Staff>();
+            this.Car = new HashSet<Car>();
         }
     
         public int id { get; set; }
@@ -26,8 +25,6 @@ namespace CarRental
     
         public virtual Address Address1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Car> Cars { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Staff> Staffs { get; set; }
+        public virtual ICollection<Car> Car { get; set; }
     }
 }

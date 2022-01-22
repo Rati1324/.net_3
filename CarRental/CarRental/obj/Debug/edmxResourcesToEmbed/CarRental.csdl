@@ -101,23 +101,13 @@
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Cars" Relationship="Self.FK_car_fuel_type" FromRole="FuelType" ToRole="Car" />
   </EntityType>
-  <EntityType Name="Role">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Staffs" Relationship="Self.FK_staff_role" FromRole="Role" ToRole="Staff" />
-  </EntityType>
   <EntityType Name="Staff">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="role" Type="Int32" />
     <Property Name="branch" Type="Int32" />
     <NavigationProperty Name="Branch1" Relationship="Self.FK_staff_branch" FromRole="Staff" ToRole="Branch" />
-    <NavigationProperty Name="Role1" Relationship="Self.FK_staff_role" FromRole="Staff" ToRole="Role" />
     <NavigationProperty Name="User" Relationship="Self.FK_Staff_User1" FromRole="Staff" ToRole="User" />
   </EntityType>
   <EntityType Name="sysdiagram">
@@ -154,6 +144,8 @@
     <NavigationProperty Name="Address1" Relationship="Self.FK_user_address" FromRole="User" ToRole="Address" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
     <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_User1" FromRole="User" ToRole="Staff" />
+    <Property Name="type" Type="Int32" />
+    <NavigationProperty Name="UserType" Relationship="CarRentalModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
   </EntityType>
   <Association Name="FK_Address_City">
     <End Role="City" Type="Self.City" Multiplicity="0..1" />
@@ -299,18 +291,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_staff_role">
-    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Role">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Staff">
-        <PropertyRef Name="role" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Staff_User1">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
@@ -333,7 +313,6 @@
     <EntitySet Name="Countries" EntityType="Self.Country" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="FuelTypes" EntityType="Self.FuelType" />
-    <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Staffs" EntityType="Self.Staff" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TransmissionTypes" EntityType="Self.TransmissionType" />
@@ -386,13 +365,34 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
-    <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
-      <End Role="Role" EntitySet="Roles" />
-      <End Role="Staff" EntitySet="Staffs" />
-    </AssociationSet>
     <AssociationSet Name="FK_Staff_User1" Association="Self.FK_Staff_User1">
       <End Role="User" EntitySet="Users" />
       <End Role="Staff" EntitySet="Staffs" />
     </AssociationSet>
+    <EntitySet Name="UserTypes" EntityType="CarRentalModel.UserType" />
+    <AssociationSet Name="FK_User_UserType" Association="CarRentalModel.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="CarRentalModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_User_UserType">
+    <End Type="CarRentalModel.UserType" Role="UserType" Multiplicity="0..1" />
+    <End Type="CarRentalModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

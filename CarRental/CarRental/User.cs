@@ -23,9 +23,11 @@ namespace CarRental
         public string password { get; set; }
         public Nullable<System.DateTime> dob { get; set; }
         public Nullable<int> address { get; set; }
+        public Nullable<int> type { get; set; }
     
         public virtual Address Address1 { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Staff Staff { get; set; }
+        public virtual UserType UserType { get; set; }
     }
 }

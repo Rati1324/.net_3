@@ -19,15 +19,28 @@ namespace CarRental {
 			string inputEmail = emailInput.Text;
 			string inputPassword = passwordInput.Text;
 
-			var user = db.Users.Where(i => i.email == inputEmail && i.password == inputPassword).Select(i => new {
+			var userInfo= db.User.Where(i => i.email == inputEmail && i.password == inputPassword).Select(i => new {
+				id = i.id,
 				email = i.email,
 				password = i.password,
+				type = i.UserType.type
 			}).ToList();
 
-			if (user.Count == 1) {
-				var HomePage = new HomePageForm();
-				HomePage.Show();
+			//MessageBox.Show(userInfo.GetType().ToString());
+			if (userInfo.Count == 2) {
+
+				if (userInfo[0].type == "Customer") {
+					var additionalUserInfo = db.Customer.Where(i => i.id == userInfo[0].id).ToList()[0];
+					var HomePage = new HomePageForm(userInfo[0], additionalUserInfo);
+				}
+				else {
+					var additionalUserInfo = db.Staff.Where(i => i.id == userInfo[0].id).ToList()[0];
+					var HomePage = new HomePageForm(userInfo, additionalUserInfo);
+				}
+				//HomePage.Show();
 			}
+
+
 		}
 	}
 }

@@ -76,7 +76,7 @@ namespace CarRental {
 			// 
 			// loginBtn
 			// 
-			this.loginBtn.Location = new System.Drawing.Point(379, 235);
+			this.loginBtn.Location = new System.Drawing.Point(379, 224);
 			this.loginBtn.Name = "loginBtn";
 			this.loginBtn.Size = new System.Drawing.Size(75, 23);
 			this.loginBtn.TabIndex = 3;

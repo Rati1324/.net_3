@@ -17,7 +17,7 @@ namespace CarRental
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Bookings = new HashSet<Booking>();
+            this.Booking = new HashSet<Booking>();
         }
     
         public int id { get; set; }
@@ -26,7 +26,7 @@ namespace CarRental
         public Nullable<byte> CVV { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Booking> Booking { get; set; }
         public virtual User User { get; set; }
     }
 }

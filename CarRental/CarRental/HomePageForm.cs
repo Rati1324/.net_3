@@ -10,7 +10,12 @@ using System.Windows.Forms;
 
 namespace CarRental {
 	public partial class HomePageForm : Form {
-		public HomePageForm() {
+		private string userType;
+
+		public HomePageForm(string UserType) {
+			if (UserType != "Admin") {
+				addUserBtn.Hide();
+			}
 			InitializeComponent();
 		}
 
@@ -20,7 +25,7 @@ namespace CarRental {
 				FirstName = i.User.f_name,
 				LastName = i.User.l_name,
 				City = i.User.Address1.City1.name,
-				Role = i.Role1.name,
+				//Role = i.Role1.name,
 				Branch = i.Branch1.Address1.City1.name
 			});
 			mainGrid.DataSource = data.ToList();

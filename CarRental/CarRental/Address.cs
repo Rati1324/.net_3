@@ -17,8 +17,8 @@ namespace CarRental
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
         {
-            this.Branches = new HashSet<Branch>();
-            this.Users = new HashSet<User>();
+            this.Branch = new HashSet<Branch>();
+            this.User = new HashSet<User>();
         }
     
         public int id { get; set; }
@@ -30,8 +30,8 @@ namespace CarRental
         public virtual City City1 { get; set; }
         public virtual Country Country1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Branch> Branches { get; set; }
+        public virtual ICollection<Branch> Branch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }
