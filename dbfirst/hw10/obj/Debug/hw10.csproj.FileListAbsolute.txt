@@ -1,0 +1,16 @@
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\hw10.exe.config
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\hw10.exe
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\hw10.pdb
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\EntityFramework.dll
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\EntityFramework.xml
+C:\Users\rati\source\repos\hw10\hw10\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.csproj.AssemblyReference.cache
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.Form1.resources
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.Properties.Resources.resources
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.csproj.GenerateResource.cache
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.exe
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.pdb
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.reportsForm.resources
+C:\Users\rati\source\repos\hw10\hw10\obj\Debug\hw10.categoryEdit.resources

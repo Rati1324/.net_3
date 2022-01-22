@@ -1,0 +1,7 @@
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\bin\Debug\entityHw.exe.config
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\bin\Debug\entityHw.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\bin\Debug\entityHw.pdb
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\obj\Debug\entityHw.csproj.AssemblyReference.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\obj\Debug\entityHw.csproj.CoreCompileInputs.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\obj\Debug\entityHw.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\entityHw\obj\Debug\entityHw.pdb

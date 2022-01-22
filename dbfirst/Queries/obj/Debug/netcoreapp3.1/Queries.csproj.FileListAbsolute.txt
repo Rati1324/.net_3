@@ -1,0 +1,14 @@
+C:\Users\rati\source\repos\hw10\Queries\bin\Debug\netcoreapp3.1\Queries.exe
+C:\Users\rati\source\repos\hw10\Queries\bin\Debug\netcoreapp3.1\Queries.deps.json
+C:\Users\rati\source\repos\hw10\Queries\bin\Debug\netcoreapp3.1\Queries.runtimeconfig.json
+C:\Users\rati\source\repos\hw10\Queries\bin\Debug\netcoreapp3.1\Queries.runtimeconfig.dev.json
+C:\Users\rati\source\repos\hw10\Queries\bin\Debug\netcoreapp3.1\Queries.dll
+C:\Users\rati\source\repos\hw10\Queries\bin\Debug\netcoreapp3.1\Queries.pdb
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.csproj.AssemblyReference.cache
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.AssemblyInfoInputs.cache
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.AssemblyInfo.cs
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.dll
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.pdb
+C:\Users\rati\source\repos\hw10\Queries\obj\Debug\netcoreapp3.1\Queries.genruntimeconfig.cache

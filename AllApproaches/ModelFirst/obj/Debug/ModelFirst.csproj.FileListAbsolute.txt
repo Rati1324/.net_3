@@ -1,0 +1,11 @@
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\ModelFirst.exe.config
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\ModelFirst.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\ModelFirst.pdb
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\EntityFramework.dll
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\EntityFramework.xml
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\obj\Debug\ModelFirst.csproj.AssemblyReference.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\obj\Debug\ModelFirst.csproj.CoreCompileInputs.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\obj\Debug\ModelFirst.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\AllApproaches\ModelFirst\obj\Debug\ModelFirst.pdb

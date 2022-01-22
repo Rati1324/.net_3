@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace PublicationSystem
 {
-	public abstract class Publication
+	public abstract class Publication: Form1
 	{
 		public string Name { set; get; }
 		public DateTime Date { set; get; }

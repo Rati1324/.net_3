@@ -1,0 +1,11 @@
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\temp.exe.config
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\temp.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\temp.pdb
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\EntityFramework.dll
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\EntityFramework.xml
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\obj\Debug\temp.csproj.AssemblyReference.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\obj\Debug\temp.csproj.CoreCompileInputs.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\obj\Debug\temp.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\entityHw\temp\obj\Debug\temp.pdb

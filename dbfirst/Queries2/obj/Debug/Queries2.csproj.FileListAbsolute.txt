@@ -1,0 +1,11 @@
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\Queries2.exe.config
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\Queries2.exe
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\Queries2.pdb
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\EntityFramework.dll
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\EntityFramework.xml
+C:\Users\rati\source\repos\hw10\Queries2\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rati\source\repos\hw10\Queries2\obj\Debug\Queries2.csproj.CoreCompileInputs.cache
+C:\Users\rati\source\repos\hw10\Queries2\obj\Debug\Queries2.exe
+C:\Users\rati\source\repos\hw10\Queries2\obj\Debug\Queries2.pdb
+C:\Users\rati\source\repos\hw10\Queries2\obj\Debug\Queries2.csproj.AssemblyReference.cache
