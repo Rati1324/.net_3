@@ -27,20 +27,11 @@ namespace CarRental {
 			}).ToList();
 
 			//MessageBox.Show(userInfo.GetType().ToString());
-			if (userInfo.Count == 2) {
-
-				if (userInfo[0].type == "Customer") {
-					var additionalUserInfo = db.Customer.Where(i => i.id == userInfo[0].id).ToList()[0];
-					var HomePage = new HomePageForm(userInfo[0], additionalUserInfo);
-				}
-				else {
-					var additionalUserInfo = db.Staff.Where(i => i.id == userInfo[0].id).ToList()[0];
-					var HomePage = new HomePageForm(userInfo, additionalUserInfo);
-				}
-				//HomePage.Show();
+			if (userInfo.Count == 1) {
+				var HomePage = new HomePageForm(userInfo[0].id, userInfo[0].type);
+				HomePage.Show();
+				this.Hide();
 			}
-
-
 		}
 	}
 }

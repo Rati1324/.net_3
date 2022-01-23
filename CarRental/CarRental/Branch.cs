@@ -18,6 +18,7 @@ namespace CarRental
         public Branch()
         {
             this.Car = new HashSet<Car>();
+            this.Staff = new HashSet<Staff>();
         }
     
         public int id { get; set; }
@@ -26,5 +27,7 @@ namespace CarRental
         public virtual Address Address1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Car { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Staff> Staff { get; set; }
     }
 }

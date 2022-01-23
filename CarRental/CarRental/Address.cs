@@ -25,7 +25,6 @@ namespace CarRental
         public Nullable<int> country { get; set; }
         public Nullable<int> city { get; set; }
         public string street { get; set; }
-        public string postal_code { get; set; }
     
         public virtual City City1 { get; set; }
         public virtual Country Country1 { get; set; }

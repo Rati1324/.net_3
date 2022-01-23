@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id" />
@@ -13,7 +13,6 @@
           <Property Name="country" Type="int" />
           <Property Name="city" Type="int" />
           <Property Name="street" Type="nvarchar" MaxLength="50" />
-          <Property Name="postal_code" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -252,6 +251,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Staff_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="branch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Staff_User1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
@@ -343,6 +354,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
+          <AssociationSet Name="FK_Staff_Branch" Association="Self.FK_Staff_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
           <AssociationSet Name="FK_Staff_User1" Association="Self.FK_Staff_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Staff" EntitySet="Staff" />
@@ -356,8 +371,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -369,7 +383,6 @@
           <Property Name="country" Type="Int32" />
           <Property Name="city" Type="Int32" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="postal_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City1" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
           <NavigationProperty Name="Country1" Relationship="Self.FK_Address_Country" FromRole="Address" ToRole="Country" />
           <NavigationProperty Name="Branch" Relationship="Self.FK_branch_address" FromRole="Address" ToRole="Branch" />
@@ -397,6 +410,7 @@
           <Property Name="address" Type="Int32" />
           <NavigationProperty Name="Address1" Relationship="Self.FK_branch_address" FromRole="Branch" ToRole="Address" />
           <NavigationProperty Name="Car" Relationship="Self.FK_car_branch" FromRole="Branch" ToRole="Car" />
+          <NavigationProperty Name="Staff" Relationship="CarRentalModel.FK_Staff_Branch" FromRole="Branch" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Car">
           <Key>
@@ -468,6 +482,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="branch" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK_Staff_User1" FromRole="Staff" ToRole="User" />
+          <NavigationProperty Name="Branch1" Relationship="CarRentalModel.FK_Staff_Branch" FromRole="Staff" ToRole="Branch" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -737,7 +752,23 @@
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_Staff_Branch" Association="CarRentalModel.FK_Staff_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Staff_Branch">
+          <End Type="CarRentalModel.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="CarRentalModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="branch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -751,7 +782,6 @@
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

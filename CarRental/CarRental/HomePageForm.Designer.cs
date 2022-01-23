@@ -27,6 +27,8 @@ namespace CarRental {
 			this.importBtn = new System.Windows.Forms.Button();
 			this.mainGrid = new System.Windows.Forms.DataGridView();
 			this.addUserBtn = new System.Windows.Forms.Button();
+			this.importSelect = new System.Windows.Forms.ComboBox();
+			this.editUserBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -50,18 +52,43 @@ namespace CarRental {
 			// 
 			// addUserBtn
 			// 
-			this.addUserBtn.Location = new System.Drawing.Point(686, 25);
+			this.addUserBtn.Location = new System.Drawing.Point(651, 25);
 			this.addUserBtn.Name = "addUserBtn";
-			this.addUserBtn.Size = new System.Drawing.Size(102, 23);
+			this.addUserBtn.Size = new System.Drawing.Size(75, 23);
 			this.addUserBtn.TabIndex = 2;
 			this.addUserBtn.Text = "Add User";
 			this.addUserBtn.UseVisualStyleBackColor = true;
+			this.addUserBtn.Click += new System.EventHandler(this.addUserBtn_Click);
+			// 
+			// importSelect
+			// 
+			this.importSelect.FormattingEnabled = true;
+			this.importSelect.Items.AddRange(new object[] {
+            "Cars",
+            "Moderators"});
+			this.importSelect.Location = new System.Drawing.Point(119, 27);
+			this.importSelect.Name = "importSelect";
+			this.importSelect.Size = new System.Drawing.Size(121, 21);
+			this.importSelect.TabIndex = 3;
+			this.importSelect.Text = "Cars";
+			// 
+			// editUserBtn
+			// 
+			this.editUserBtn.Location = new System.Drawing.Point(569, 25);
+			this.editUserBtn.Name = "editUserBtn";
+			this.editUserBtn.Size = new System.Drawing.Size(75, 23);
+			this.editUserBtn.TabIndex = 4;
+			this.editUserBtn.Text = "Edit User";
+			this.editUserBtn.UseVisualStyleBackColor = true;
+			this.editUserBtn.Click += new System.EventHandler(this.editUserBtn_Click);
 			// 
 			// HomePageForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.editUserBtn);
+			this.Controls.Add(this.importSelect);
 			this.Controls.Add(this.addUserBtn);
 			this.Controls.Add(this.mainGrid);
 			this.Controls.Add(this.importBtn);
@@ -77,6 +104,8 @@ namespace CarRental {
 		private System.Windows.Forms.Button importBtn;
 		private System.Windows.Forms.DataGridView mainGrid;
 		private System.Windows.Forms.Button addUserBtn;
+		private System.Windows.Forms.ComboBox importSelect;
+		private System.Windows.Forms.Button editUserBtn;
 	}
 }
 

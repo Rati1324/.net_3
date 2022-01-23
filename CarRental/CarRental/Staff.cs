@@ -18,5 +18,6 @@ namespace CarRental
         public Nullable<int> branch { get; set; }
     
         public virtual User User { get; set; }
+        public virtual Branch Branch1 { get; set; }
     }
 }

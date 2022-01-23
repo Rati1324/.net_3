@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country" Type="Int32" />
+    <Property Name="city" Type="Int32" />
+    <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City1" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
+    <NavigationProperty Name="Country1" Relationship="Self.FK_Address_Country" FromRole="Address" ToRole="Country" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_branch_address" FromRole="Address" ToRole="Branch" />
+    <NavigationProperty Name="User" Relationship="Self.FK_user_address" FromRole="Address" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="booking_date" Type="DateTime" Precision="3" />
+    <Property Name="return_date" Type="DateTime" Precision="3" />
+    <Property Name="car_id" Type="Int32" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="cost" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_booking_car" FromRole="Booking" ToRole="Car" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_booking_customer" FromRole="Booking" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="address" Type="Int32" />
+    <NavigationProperty Name="Address1" Relationship="Self.FK_branch_address" FromRole="Branch" ToRole="Address" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_car_branch" FromRole="Branch" ToRole="Car" />
+    <NavigationProperty Name="Staff" Relationship="CarRentalModel.FK_Staff_Branch" FromRole="Branch" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="year" Type="Int32" />
+    <Property Name="power_hp" Type="Int32" />
+    <Property Name="transmission_type" Type="Int32" />
+    <Property Name="fuel_type" Type="Int32" />
+    <Property Name="body_type" Type="Int32" />
+    <Property Name="speed" Type="Int32" />
+    <Property Name="branch" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Booking" Relationship="Self.FK_booking_car" FromRole="Car" ToRole="Booking" />
+    <NavigationProperty Name="Branch1" Relationship="Self.FK_car_branch" FromRole="Car" ToRole="Branch" />
+    <NavigationProperty Name="CarBodyType" Relationship="Self.FK_car_car_body_type" FromRole="Car" ToRole="CarBodyType" />
+    <NavigationProperty Name="FuelType" Relationship="Self.FK_car_fuel_type" FromRole="Car" ToRole="FuelType" />
+    <NavigationProperty Name="TransmissionType" Relationship="Self.FK_car_transmission_type" FromRole="Car" ToRole="TransmissionType" />
+  </EntityType>
+  <EntityType Name="CarBodyType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_car_car_body_type" FromRole="CarBodyType" ToRole="Car" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_Address_City" FromRole="City" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_Address_Country" FromRole="Country" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="card_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="expiration_date" Type="DateTime" Precision="0" />
+    <Property Name="CVV" Type="Byte" />
+    <NavigationProperty Name="Booking" Relationship="Self.FK_booking_customer" FromRole="Customer" ToRole="Booking" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Customer_User" FromRole="Customer" ToRole="User" />
+  </EntityType>
+  <EntityType Name="FuelType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_car_fuel_type" FromRole="FuelType" ToRole="Car" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="branch" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Staff_User1" FromRole="Staff" ToRole="User" />
+    <NavigationProperty Name="Branch1" Relationship="CarRentalModel.FK_Staff_Branch" FromRole="Staff" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TransmissionType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_car_transmission_type" FromRole="TransmissionType" ToRole="Car" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="l_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="personal_id" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="address" Type="Int32" />
+    <Property Name="type" Type="Int32" />
+    <NavigationProperty Name="Address1" Relationship="Self.FK_user_address" FromRole="User" ToRole="Address" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_User1" FromRole="User" ToRole="Staff" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Address_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="city" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_branch_address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="address" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="address" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_booking_car">
+    <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="car_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_booking_customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_car_branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Car" Type="Self.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="branch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_car_car_body_type">
+    <End Role="CarBodyType" Type="Self.CarBodyType" Multiplicity="0..1" />
+    <End Role="Car" Type="Self.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarBodyType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="body_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_car_fuel_type">
+    <End Role="FuelType" Type="Self.FuelType" Multiplicity="0..1" />
+    <End Role="Car" Type="Self.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuelType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="fuel_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_car_transmission_type">
+    <End Role="TransmissionType" Type="Self.TransmissionType" Multiplicity="0..1" />
+    <End Role="Car" Type="Self.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransmissionType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="transmission_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CarRentalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Address" EntityType="Self.Address" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" />
+    <EntitySet Name="Branch" EntityType="Self.Branch" />
+    <EntitySet Name="Car" EntityType="Self.Car" />
+    <EntitySet Name="CarBodyType" EntityType="Self.CarBodyType" />
+    <EntitySet Name="City" EntityType="Self.City" />
+    <EntitySet Name="Country" EntityType="Self.Country" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="FuelType" EntityType="Self.FuelType" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TransmissionType" EntityType="Self.TransmissionType" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserType" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_branch_address" Association="Self.FK_branch_address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Branch" EntitySet="Branch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_address" Association="Self.FK_user_address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_booking_car" Association="Self.FK_booking_car">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_booking_customer" Association="Self.FK_booking_customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_car_branch" Association="Self.FK_car_branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Car" EntitySet="Car" />
+    </AssociationSet>
+    <AssociationSet Name="FK_car_car_body_type" Association="Self.FK_car_car_body_type">
+      <End Role="CarBodyType" EntitySet="CarBodyType" />
+      <End Role="Car" EntitySet="Car" />
+    </AssociationSet>
+    <AssociationSet Name="FK_car_fuel_type" Association="Self.FK_car_fuel_type">
+      <End Role="FuelType" EntitySet="FuelType" />
+      <End Role="Car" EntitySet="Car" />
+    </AssociationSet>
+    <AssociationSet Name="FK_car_transmission_type" Association="Self.FK_car_transmission_type">
+      <End Role="TransmissionType" EntitySet="TransmissionType" />
+      <End Role="Car" EntitySet="Car" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_User1" Association="Self.FK_Staff_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserType" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Branch" Association="CarRentalModel.FK_Staff_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Staff_Branch">
+    <End Type="CarRentalModel.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="CarRentalModel.Staff" Role="Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="branch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
