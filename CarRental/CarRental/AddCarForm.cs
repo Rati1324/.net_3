@@ -18,32 +18,45 @@ namespace CarRental {
 			InitializeComponent();
 			var transmissions = db.TransmissionType.Select(i => new {id = i.id, name = i.name}).ToList();
 			#region dropdown items
+			List<Object> items = new List<Object>() {};
+
 			transmissionInput.DisplayMember = "Text";
 			transmissionInput.ValueMember = "Value";
-			List<Object> items = new List<Object>() {};
 			foreach (var t in transmissions) {
 				items.Add(new { Text = t.name, Value = t.id });
 			}
 			transmissionInput.SelectedValue = items.First();
 			transmissionInput.DataSource = items;
-
-			var branches = db.Branch.Select(i => i.City1.name).ToList();
+			items.Clear();
+			
+			branchInput.DisplayMember = "Text";
+			branchInput.ValueMember = "Value";
+			var branches = db.Branch.Select(i => new { id = i.id, name = i.City1.name }).ToList();
 			foreach (var b in branches) {
-				branchInput.Items.Add(b);
+				items.Add(new { Text = b.name, Value = b.id });
 			}
-			branchInput.SelectedIndex = 0;
+			branchInput.SelectedValue = items.First();
+			branchInput.DataSource = items;
+			items.Clear();
 
-			var fuels = db.FuelType.Select(i => i.name).ToList();
-			foreach (var b in fuels) {
-				fuelInput.Items.Add(b);
+			fuelInput.DisplayMember = "Text";
+			fuelInput.ValueMember = "Value";
+			var fuels = db.FuelType.Select(i => new { id = i.id, name = i.name }).ToList();
+			foreach (var f in fuels) {
+				items.Add(new { Text = f.name, Value = f.id });
 			}
-			fuelInput.SelectedIndex = 0;
+			fuelInput.SelectedValue = items.First();
+			fuelInput.DataSource = items;
+			items.Clear();
 
+			bodyTypeInput.DisplayMember = "Text";
+			bodyTypeInput.ValueMember = "Value";
 			var bodyTypes = db.CarBodyType.Select(i => new { id = i.id, name = i.name }).ToList();
 			foreach (var b in bodyTypes) {
-				//bodyTypeInput.Items.Add(new {);
+				items.Add(new { Text = b.name, Value = b.id });
 			}
-			//bodyTypeInput.SelectedIndex = 0;
+			bodyTypeInput.SelectedValue = items.First();
+			bodyTypeInput.DataSource = items;
 
 			if (id == 0) {
 				saveCarBtn.Hide();
@@ -56,16 +69,17 @@ namespace CarRental {
 		}
 
 		private void addBtn_Click(object sender, EventArgs e) {
-			//this.car.name = nameInput.Text;
-			//this.car.speed = Int32.Parse(speedInput.Text);
-			//this.car.price = Int32.Parse(priceInput.Text);
-			//this.car.power_hp = Int32.Parse(powerInput.Text);
-			//this.car.name = nameInput.Text;
-			//this.car.license_number = licenseInput.Text;
+			this.car.name = nameInput.Text;
+			this.car.speed = Int32.Parse(speedInput.Text);
+			this.car.price = Int32.Parse(priceInput.Text);
+			this.car.power_hp = Int32.Parse(powerInput.Text);
+			this.car.name = nameInput.Text;
+			this.car.license_number = licenseInput.Text;
 			this.car.transmission_type = Int32.Parse(transmissionInput.SelectedValue.ToString());
-			//this.car.transmission_type = Int32.Parse(((KeyValuePair<string, string>)transmissionInput.SelectedItem).Value);
-			MessageBox.Show(this.car.transmission_type.ToString());
-
+			this.car.branch = Int32.Parse(branchInput.SelectedValue.ToString());
+			this.car.body_type = Int32.Parse(bodyTypeInput.SelectedValue.ToString());
+			db.Car.Add(this.car);
+			db.SaveChanges();
 		}
 
 		private void populate() {
