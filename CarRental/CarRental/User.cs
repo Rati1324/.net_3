@@ -24,6 +24,7 @@ namespace CarRental
         public Nullable<System.DateTime> dob { get; set; }
         public Nullable<int> address { get; set; }
         public Nullable<int> type { get; set; }
+        public string full_address { get; set; }
     
         public virtual Address Address1 { get; set; }
         public virtual Customer Customer { get; set; }

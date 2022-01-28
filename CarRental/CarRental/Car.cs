@@ -30,6 +30,7 @@ namespace CarRental
         public Nullable<int> speed { get; set; }
         public Nullable<int> branch { get; set; }
         public Nullable<decimal> price { get; set; }
+        public string license_number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Booking { get; set; }

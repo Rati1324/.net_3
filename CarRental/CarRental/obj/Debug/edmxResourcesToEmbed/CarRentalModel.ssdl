@@ -7,7 +7,6 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="country" Type="int" />
     <Property Name="city" Type="int" />
-    <Property Name="street" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>
@@ -26,7 +25,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="address" Type="int" />
+    <Property Name="city" Type="int" />
   </EntityType>
   <EntityType Name="Car">
     <Key>
@@ -42,6 +41,7 @@
     <Property Name="speed" Type="int" />
     <Property Name="branch" Type="int" />
     <Property Name="price" Type="money" />
+    <Property Name="license_number" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CarBodyType">
     <Key>
@@ -117,6 +117,7 @@
     <Property Name="password" Type="varchar" MaxLength="150" />
     <Property Name="dob" Type="date" />
     <Property Name="address" Type="int" />
+    <Property Name="full_address" Type="varchar" MaxLength="50" />
     <Property Name="type" Type="int" />
   </EntityType>
   <EntityType Name="UserType">
@@ -174,15 +175,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_branch_address">
-    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+  <Association Name="FK_Branch_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
     <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Address">
+      <Principal Role="City">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Branch">
-        <PropertyRef Name="address" />
+        <PropertyRef Name="city" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -325,8 +326,8 @@
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Booking" EntitySet="Booking" />
     </AssociationSet>
-    <AssociationSet Name="FK_branch_address" Association="Self.FK_branch_address">
-      <End Role="Address" EntitySet="Address" />
+    <AssociationSet Name="FK_Branch_City" Association="Self.FK_Branch_City">
+      <End Role="City" EntitySet="City" />
       <End Role="Branch" EntitySet="Branch" />
     </AssociationSet>
     <AssociationSet Name="FK_car_branch" Association="Self.FK_car_branch">

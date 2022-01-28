@@ -7,7 +7,7 @@
       <Diagram DiagramId="db2e8c8334a84740a1adc6120575f303" Name="Diagram1">
         <EntityTypeShape EntityType="CarRentalModel.Address" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.Booking" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarRentalModel.Branch" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.Branch" Width="1.5" PointX="5" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.Car" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.CarBodyType" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.City" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
@@ -21,7 +21,6 @@
         <EntityTypeShape EntityType="CarRentalModel.UserType" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="CarRentalModel.FK_Address_City" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_Address_Country" ManuallyRouted="false" />
-        <AssociationConnector Association="CarRentalModel.FK_branch_address" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_user_address" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_booking_car" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_booking_customer" ManuallyRouted="false" />
@@ -33,6 +32,7 @@
         <AssociationConnector Association="CarRentalModel.FK_Staff_User1" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_User_UserType" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_Staff_Branch" />
+        <AssociationConnector Association="CarRentalModel.FK_Branch_City" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

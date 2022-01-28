@@ -29,6 +29,7 @@ namespace CarRental {
 			this.addUserBtn = new System.Windows.Forms.Button();
 			this.importSelect = new System.Windows.Forms.ComboBox();
 			this.editUserBtn = new System.Windows.Forms.Button();
+			this.addCarBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -74,19 +75,30 @@ namespace CarRental {
 			// 
 			// editUserBtn
 			// 
-			this.editUserBtn.Location = new System.Drawing.Point(569, 25);
+			this.editUserBtn.Location = new System.Drawing.Point(467, 25);
 			this.editUserBtn.Name = "editUserBtn";
 			this.editUserBtn.Size = new System.Drawing.Size(75, 23);
 			this.editUserBtn.TabIndex = 4;
-			this.editUserBtn.Text = "Edit User";
+			this.editUserBtn.Text = "Edit Item";
 			this.editUserBtn.UseVisualStyleBackColor = true;
 			this.editUserBtn.Click += new System.EventHandler(this.editUserBtn_Click);
+			// 
+			// addCarBtn
+			// 
+			this.addCarBtn.Location = new System.Drawing.Point(560, 25);
+			this.addCarBtn.Name = "addCarBtn";
+			this.addCarBtn.Size = new System.Drawing.Size(75, 23);
+			this.addCarBtn.TabIndex = 5;
+			this.addCarBtn.Text = "Add Car";
+			this.addCarBtn.UseVisualStyleBackColor = true;
+			this.addCarBtn.Click += new System.EventHandler(this.addCarBtn_Click);
 			// 
 			// HomePageForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.addCarBtn);
 			this.Controls.Add(this.editUserBtn);
 			this.Controls.Add(this.importSelect);
 			this.Controls.Add(this.addUserBtn);
@@ -106,6 +118,7 @@ namespace CarRental {
 		private System.Windows.Forms.Button addUserBtn;
 		private System.Windows.Forms.ComboBox importSelect;
 		private System.Windows.Forms.Button editUserBtn;
+		private System.Windows.Forms.Button addCarBtn;
 	}
 }
 

@@ -7,7 +7,6 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="country" ColumnName="country" />
           <ScalarProperty Name="city" ColumnName="city" />
-          <ScalarProperty Name="street" ColumnName="street" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -27,14 +26,15 @@
     <EntitySetMapping Name="Branch">
       <EntityTypeMapping TypeName="CarRentalModel.Branch">
         <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="city" ColumnName="city" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="address" ColumnName="address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Car">
       <EntityTypeMapping TypeName="CarRentalModel.Car">
         <MappingFragment StoreEntitySet="Car">
+          <ScalarProperty Name="license_number" ColumnName="license_number" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="year" ColumnName="year" />
@@ -120,6 +120,7 @@
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="CarRentalModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="full_address" ColumnName="full_address" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="f_name" ColumnName="f_name" />
           <ScalarProperty Name="l_name" ColumnName="l_name" />

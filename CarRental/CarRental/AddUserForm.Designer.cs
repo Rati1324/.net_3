@@ -49,6 +49,9 @@ namespace CarRental {
 			this.addBtn = new System.Windows.Forms.Button();
 			this.dobInput = new System.Windows.Forms.DateTimePicker();
 			this.backBtn = new System.Windows.Forms.Button();
+			this.saveBtn = new System.Windows.Forms.Button();
+			this.branchInput = new System.Windows.Forms.ComboBox();
+			this.label11 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// fNameInput
@@ -233,7 +236,7 @@ namespace CarRental {
 			// 
 			// addBtn
 			// 
-			this.addBtn.Location = new System.Drawing.Point(374, 469);
+			this.addBtn.Location = new System.Drawing.Point(374, 493);
 			this.addBtn.Name = "addBtn";
 			this.addBtn.Size = new System.Drawing.Size(75, 23);
 			this.addBtn.TabIndex = 3;
@@ -258,15 +261,45 @@ namespace CarRental {
 			this.backBtn.UseVisualStyleBackColor = true;
 			this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
 			// 
+			// saveBtn
+			// 
+			this.saveBtn.Location = new System.Drawing.Point(374, 493);
+			this.saveBtn.Name = "saveBtn";
+			this.saveBtn.Size = new System.Drawing.Size(75, 23);
+			this.saveBtn.TabIndex = 6;
+			this.saveBtn.Text = "Save";
+			this.saveBtn.UseVisualStyleBackColor = true;
+			this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+			// 
+			// branchInput
+			// 
+			this.branchInput.FormattingEnabled = true;
+			this.branchInput.Location = new System.Drawing.Point(292, 466);
+			this.branchInput.Name = "branchInput";
+			this.branchInput.Size = new System.Drawing.Size(157, 21);
+			this.branchInput.TabIndex = 7;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(214, 472);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(44, 13);
+			this.label11.TabIndex = 2;
+			this.label11.Text = "Branch:";
+			// 
 			// AddUserForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 528);
+			this.ClientSize = new System.Drawing.Size(800, 555);
+			this.Controls.Add(this.branchInput);
+			this.Controls.Add(this.saveBtn);
 			this.Controls.Add(this.backBtn);
 			this.Controls.Add(this.dobInput);
 			this.Controls.Add(this.addBtn);
 			this.Controls.Add(this.label2);
+			this.Controls.Add(this.label11);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label10);
 			this.Controls.Add(this.label9);
@@ -322,5 +355,8 @@ namespace CarRental {
 		private System.Windows.Forms.Button addBtn;
 		private System.Windows.Forms.DateTimePicker dobInput;
 		private System.Windows.Forms.Button backBtn;
+		private System.Windows.Forms.Button saveBtn;
+		private System.Windows.Forms.ComboBox branchInput;
+		private System.Windows.Forms.Label label11;
 	}
 }

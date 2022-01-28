@@ -18,6 +18,7 @@ namespace CarRental
         public City()
         {
             this.Address = new HashSet<Address>();
+            this.Branch = new HashSet<Branch>();
         }
     
         public int id { get; set; }
@@ -25,5 +26,7 @@ namespace CarRental
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Branch> Branch { get; set; }
     }
 }

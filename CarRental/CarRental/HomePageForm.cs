@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace CarRental {
 	public partial class HomePageForm : Form {
-		AddUserForm userForm = new AddUserForm();
 		public HomePageForm(int id, string UserType) {
 			if (UserType != "Admin") {
 				addUserBtn.Hide();
@@ -24,6 +23,7 @@ namespace CarRental {
 
 			if (selected == "Cars") {
 				var data = db.Car.Select(i => new {
+					Id = i.id,
 					Name = i.name,
 					Year = i.year,
 					Power = i.power_hp,
@@ -35,6 +35,7 @@ namespace CarRental {
 					Price = i.price
 				});
 				mainGrid.DataSource = data.ToList();
+				mainGrid.Columns[0].Visible = false;
 			}
 			else {
 				var data = db.User.Where(u => u.UserType.type == "Moderator").Select(i => new {
@@ -48,23 +49,38 @@ namespace CarRental {
 					Dob = i.dob,
 					Country = i.Address1.Country1.name,
 					City = i.Address1.City1.name,
+					Street = i.full_address
 				}).ToList();
-
 
 				// Need to compine additionaldata
 				mainGrid.DataSource = data;
+				mainGrid.Columns[0].Visible = false;
 			}
 		}
 
 		private void addUserBtn_Click(object sender, EventArgs e) {
-			this.userForm.Show();
+			AddUserForm userForm = new AddUserForm();
+			userForm.Show();
 		}
 
 		private void editUserBtn_Click(object sender, EventArgs e) {
-			string email = mainGrid.Rows[0].Cells[0].Value.ToString();
-			int index = mainGrid.SelectedCells[0].RowIndex;
-			this.userForm.Show();
-			this.userForm.populate(email);
+			if (importSelect.Text.Equals("Cars")) {
+				int index = mainGrid.SelectedCells[0].RowIndex;
+				int id = Int32.Parse(mainGrid.Rows[index].Cells[0].Value.ToString());
+				AddCarForm carForm = new AddCarForm(id);
+				carForm.Show();
+			}
+			else {
+				int index = mainGrid.SelectedCells[0].RowIndex;
+				int id = Int32.Parse(mainGrid.Rows[index].Cells[0].Value.ToString());
+				AddUserForm userForm = new AddUserForm(id);
+				userForm.Show();
+			}
+		}
+
+		private void addCarBtn_Click(object sender, EventArgs e) {
+			AddCarForm carForm = new AddCarForm();
+			carForm.Show();
 		}
 	}
 }
