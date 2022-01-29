@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Address">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="country" Type="int" />
-          <Property Name="city" Type="int" />
-        </EntityType>
         <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="id" />
@@ -61,6 +53,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="int" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -132,30 +125,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Address_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="city" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="country" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_booking_car">
           <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
@@ -240,6 +209,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -276,11 +257,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_user_address">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+        <Association Name="FK_User_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Address">
+            <Principal Role="City">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="User">
@@ -301,7 +282,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CarRentalModelStoreContainer">
-          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
@@ -315,14 +295,6 @@
           <EntitySet Name="TransmissionType" EntityType="Self.TransmissionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
-            <End Role="City" EntitySet="City" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
           <AssociationSet Name="FK_booking_car" Association="Self.FK_booking_car">
             <End Role="Car" EntitySet="Car" />
             <End Role="Booking" EntitySet="Booking" />
@@ -351,6 +323,10 @@
             <End Role="TransmissionType" EntitySet="TransmissionType" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
             <End Role="User" EntitySet="User" />
             <End Role="Customer" EntitySet="Customer" />
@@ -363,8 +339,8 @@
             <End Role="User" EntitySet="User" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-          <AssociationSet Name="FK_user_address" Association="Self.FK_user_address">
-            <End Role="Address" EntitySet="Address" />
+          <AssociationSet Name="FK_User_City" Association="Self.FK_User_City">
+            <End Role="City" EntitySet="City" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
@@ -376,17 +352,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Address">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="country" Type="Int32" />
-          <Property Name="city" Type="Int32" />
-          <NavigationProperty Name="City1" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
-          <NavigationProperty Name="Country1" Relationship="Self.FK_Address_Country" FromRole="Address" ToRole="Country" />
-          <NavigationProperty Name="User" Relationship="Self.FK_user_address" FromRole="Address" ToRole="User" />
-        </EntityType>
         <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="id" />
@@ -446,8 +411,10 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_Address_City" FromRole="City" ToRole="Address" />
           <NavigationProperty Name="Branch" Relationship="CarRentalModel.FK_Branch_City" FromRole="City" ToRole="Branch" />
+          <Property Name="country" Type="Int32" />
+          <NavigationProperty Name="Country1" Relationship="CarRentalModel.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="User" Relationship="CarRentalModel.FK_User_City" FromRole="City" ToRole="User" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -455,7 +422,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_Address_Country" FromRole="Country" ToRole="Address" />
+          <NavigationProperty Name="City" Relationship="CarRentalModel.FK_City_Country" FromRole="Country" ToRole="City" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -517,11 +484,11 @@
           <Property Name="dob" Type="DateTime" Precision="0" />
           <Property Name="address" Type="Int32" />
           <Property Name="type" Type="Int32" />
-          <NavigationProperty Name="Address1" Relationship="Self.FK_user_address" FromRole="User" ToRole="Address" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_User1" FromRole="User" ToRole="Staff" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
           <Property Name="full_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="CarRentalModel.FK_User_City" FromRole="User" ToRole="City" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -531,42 +498,6 @@
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Address_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="city" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="country" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_address">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="address" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_booking_car">
           <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
@@ -676,7 +607,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CarRentalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Address" EntityType="Self.Address" />
           <EntitySet Name="Booking" EntityType="Self.Booking" />
           <EntitySet Name="Branch" EntityType="Self.Branch" />
           <EntitySet Name="Car" EntityType="Self.Car" />
@@ -690,18 +620,6 @@
           <EntitySet Name="TransmissionType" EntityType="Self.TransmissionType" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="UserType" EntityType="Self.UserType" />
-          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
-            <End Role="City" EntitySet="City" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_address" Association="Self.FK_user_address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_booking_car" Association="Self.FK_booking_car">
             <End Role="Car" EntitySet="Car" />
             <End Role="Booking" EntitySet="Booking" />
@@ -746,6 +664,14 @@
             <End Role="City" EntitySet="City" />
             <End Role="Branch" EntitySet="Branch" />
           </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="CarRentalModel.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_City" Association="CarRentalModel.FK_User_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Staff_Branch">
           <End Type="CarRentalModel.Branch" Role="Branch" Multiplicity="0..1" />
@@ -771,21 +697,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_City_Country">
+          <End Type="CarRentalModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="CarRentalModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_City">
+          <End Type="CarRentalModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="CarRentalModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CarRentalModelStoreContainer" CdmEntityContainer="CarRentalEntities">
-          <EntitySetMapping Name="Address">
-            <EntityTypeMapping TypeName="CarRentalModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="city" ColumnName="city" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Booking">
             <EntityTypeMapping TypeName="CarRentalModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
@@ -835,6 +776,7 @@
           <EntitySetMapping Name="City">
             <EntityTypeMapping TypeName="CarRentalModel.City">
               <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>

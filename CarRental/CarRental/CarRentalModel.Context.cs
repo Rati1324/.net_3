@@ -25,7 +25,6 @@ namespace CarRental
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Booking> Booking { get; set; }
         public virtual DbSet<Branch> Branch { get; set; }
         public virtual DbSet<Car> Car { get; set; }

@@ -30,6 +30,7 @@ namespace CarRental {
 			this.importSelect = new System.Windows.Forms.ComboBox();
 			this.editItemBtn = new System.Windows.Forms.Button();
 			this.addCarBtn = new System.Windows.Forms.Button();
+			this.deleteBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -93,11 +94,22 @@ namespace CarRental {
 			this.addCarBtn.UseVisualStyleBackColor = true;
 			this.addCarBtn.Click += new System.EventHandler(this.addCarBtn_Click);
 			// 
+			// deleteBtn
+			// 
+			this.deleteBtn.Location = new System.Drawing.Point(377, 25);
+			this.deleteBtn.Name = "deleteBtn";
+			this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+			this.deleteBtn.TabIndex = 6;
+			this.deleteBtn.Text = "Delete item";
+			this.deleteBtn.UseVisualStyleBackColor = true;
+			this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+			// 
 			// HomePageForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.deleteBtn);
 			this.Controls.Add(this.addCarBtn);
 			this.Controls.Add(this.editItemBtn);
 			this.Controls.Add(this.importSelect);
@@ -119,6 +131,7 @@ namespace CarRental {
 		private System.Windows.Forms.ComboBox importSelect;
 		private System.Windows.Forms.Button editItemBtn;
 		private System.Windows.Forms.Button addCarBtn;
+		private System.Windows.Forms.Button deleteBtn;
 	}
 }
 

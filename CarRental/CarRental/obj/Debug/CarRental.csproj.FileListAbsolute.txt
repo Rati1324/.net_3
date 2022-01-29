@@ -30,3 +30,4 @@ C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\En
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.AddUserForm.resources
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.AddCarForm.resources
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.RegisterForm.resources

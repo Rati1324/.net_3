@@ -26,9 +26,9 @@ namespace CarRental
         public Nullable<int> type { get; set; }
         public string full_address { get; set; }
     
-        public virtual Address Address1 { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Staff Staff { get; set; }
         public virtual UserType UserType { get; set; }
+        public virtual City City { get; set; }
     }
 }

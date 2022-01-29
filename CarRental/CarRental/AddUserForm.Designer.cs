@@ -48,7 +48,6 @@ namespace CarRental {
 			this.label10 = new System.Windows.Forms.Label();
 			this.addBtn = new System.Windows.Forms.Button();
 			this.dobInput = new System.Windows.Forms.DateTimePicker();
-			this.backBtn = new System.Windows.Forms.Button();
 			this.saveBtn = new System.Windows.Forms.Button();
 			this.branchInput = new System.Windows.Forms.ComboBox();
 			this.label11 = new System.Windows.Forms.Label();
@@ -251,16 +250,6 @@ namespace CarRental {
 			this.dobInput.Size = new System.Drawing.Size(157, 20);
 			this.dobInput.TabIndex = 4;
 			// 
-			// backBtn
-			// 
-			this.backBtn.Location = new System.Drawing.Point(24, 18);
-			this.backBtn.Name = "backBtn";
-			this.backBtn.Size = new System.Drawing.Size(75, 23);
-			this.backBtn.TabIndex = 5;
-			this.backBtn.Text = "Back";
-			this.backBtn.UseVisualStyleBackColor = true;
-			this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
-			// 
 			// saveBtn
 			// 
 			this.saveBtn.Location = new System.Drawing.Point(374, 493);
@@ -295,7 +284,6 @@ namespace CarRental {
 			this.ClientSize = new System.Drawing.Size(800, 555);
 			this.Controls.Add(this.branchInput);
 			this.Controls.Add(this.saveBtn);
-			this.Controls.Add(this.backBtn);
 			this.Controls.Add(this.dobInput);
 			this.Controls.Add(this.addBtn);
 			this.Controls.Add(this.label2);
@@ -354,7 +342,6 @@ namespace CarRental {
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Button addBtn;
 		private System.Windows.Forms.DateTimePicker dobInput;
-		private System.Windows.Forms.Button backBtn;
 		private System.Windows.Forms.Button saveBtn;
 		private System.Windows.Forms.ComboBox branchInput;
 		private System.Windows.Forms.Label label11;

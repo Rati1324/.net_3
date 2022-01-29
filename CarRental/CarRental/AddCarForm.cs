@@ -24,7 +24,6 @@ namespace CarRental {
 			else {
 				fillComboboxes(d.Cells[4].Value.ToString(), d.Cells[5].Value.ToString(), d.Cells[6].Value.ToString(), d.Cells[8].Value.ToString());
 				this.id = Int32.Parse(d.Cells[0].Value.ToString());
-				MessageBox.Show(d.Cells[10].Value.ToString());
 				fillInputs(d.Cells[1].Value.ToString(), d.Cells[2].Value.ToString(), d.Cells[3].Value.ToString(), d.Cells[7].Value.ToString(), d.Cells[9].Value.ToString(), d.Cells[10].Value.ToString());
 			}
 		}
@@ -40,7 +39,7 @@ namespace CarRental {
 			this.car.branch = Int32.Parse(branchInput.SelectedValue.ToString());
 			this.car.body_type = Int32.Parse(bodyTypeInput.SelectedValue.ToString());
 			this.car.fuel_type = Int32.Parse(fuelInput.SelectedValue.ToString());
-			this.car.year = Int32.Parse(yearInput.Text);
+			this.car.year = Int32.Parse(yearInput.Text.ToString());
 			db.Car.Add(this.car);
 			db.SaveChanges();
 		}

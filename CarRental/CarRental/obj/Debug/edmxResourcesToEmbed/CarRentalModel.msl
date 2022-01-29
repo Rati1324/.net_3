@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CarRentalModelStoreContainer" CdmEntityContainer="CarRentalEntities">
-    <EntitySetMapping Name="Address">
-      <EntityTypeMapping TypeName="CarRentalModel.Address">
-        <MappingFragment StoreEntitySet="Address">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="country" ColumnName="country" />
-          <ScalarProperty Name="city" ColumnName="city" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Booking">
       <EntityTypeMapping TypeName="CarRentalModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
@@ -59,6 +50,7 @@
     <EntitySetMapping Name="City">
       <EntityTypeMapping TypeName="CarRentalModel.City">
         <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="country" ColumnName="country" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>

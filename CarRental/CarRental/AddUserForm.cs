@@ -34,7 +34,6 @@ namespace CarRental {
 		}
 
 		private void addBtn_Click(object sender, EventArgs e) {
-			var x = db.Address.Where(i => i.country == 1 && i.city == 1).ToList();
 			this.user.f_name = fNameInput.Text;
 			this.user.l_name = lNameInput.Text;
 			this.user.personal_id = pIdInput.Text;
@@ -50,7 +49,7 @@ namespace CarRental {
 			db.SaveChanges();
 		}
 		
-		private void saveBtn_Click(object sender, EventArgs e) {
+		public void saveBtn_Click(object sender, EventArgs e) {
 			this.user.f_name = fNameInput.Text;
 			this.user.l_name = lNameInput.Text;
 			this.user.phone = phoneInput.Text;
@@ -71,43 +70,24 @@ namespace CarRental {
 			var city = db.City.Where(i => i.name == cityInput.Text).Select(i => new {
 				id = i.id 
 			}).ToList();
+
 			if (country.Count == 1 && city.Count == 1) {
-				int cityId = city[0].id;
-				int countryId = country[0].id;
-				var a = db.Address.Where(i => i.city == cityId && i.country == countryId).ToList();
-				if (a.Count == 1) {
-					this.user.address = a[0].id;
-				}
-				this.user.address = insertAddress(country[0].id, city[0].id);
+				this.user.address = city[0].id;
 			}
-			else if (country.Count == 1) {
-				City c = new City { name = cityInput.Text };
+			else if (country.Count == 1 && city.Count == 0) {
+				City c = new City { name = cityInput.Text, country = country[0].id };
 				db.City.Add(c);
 				db.SaveChanges();
-				this.user.address = insertAddress(country[0].id, c.id);
-			}
-			else if (city.Count == 1) {
-				Country c = new Country { name = countryInput.Text };
-				db.Country.Add(c);
-				db.SaveChanges();
-				this.user.address = insertAddress(c.id, city[0].id);
+				this.user.address = c.id;
 			}
 			else {
 				Country co = new Country { name = countryInput.Text };
-				City ci = new City { name = cityInput.Text };
+				City ci = new City { name = cityInput.Text, country = co.id };
 				db.Country.Add(co);
-				db.SaveChanges();
 				db.City.Add(ci);
 				db.SaveChanges();
-				this.user.address = insertAddress(co.id, ci.id);
+				this.user.address = ci.id;
 			}
-		}
-
-		private int insertAddress(int countryId, int cityId) {
-			Address A = new Address { country = countryId, city = cityId };
-			db.Address.Add(A);
-			db.SaveChanges();
-			return A.id;
 		}
 
 		private void populate() {
@@ -118,12 +98,12 @@ namespace CarRental {
 			pIdInput.Text = user.personal_id;
 			emailInput.Text = user.email;
 			dobInput.Value = (DateTime)user.dob;
-			countryInput.Text = user.Address1.Country1.name;
-			cityInput.Text = user.Address1.City1.name;
+			//countryInput.Text = user.Address1.Country1.name;
+			//cityInput.Text = user.Address1.City1.name;
 			streetInput.Text = user.full_address;
 			passwordInput.Text = user.password;
-			this.oldCountry = user.Address1.Country1.name;
-			this.oldCity = user.Address1.City1.name;
+			//this.oldCountry = user.Address1.Country1.name;
+			//this.oldCity = user.Address1.City1.name;
 		}
 
 		private void backBtn_Click(object sender, EventArgs e) {
