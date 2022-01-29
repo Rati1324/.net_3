@@ -10,62 +10,23 @@ using System.Windows.Forms;
 
 namespace CarRental {
 	public partial class AddCarForm : Form {
-		private int id;
 		private Car car = new Car();
+		private int id;
+
 		CarRentalEntities db = new CarRentalEntities();
 
-		public AddCarForm(int id = 0) {
+		public AddCarForm(DataGridViewRow d = null) {
 			InitializeComponent();
-			var transmissions = db.TransmissionType.Select(i => new {id = i.id, name = i.name}).ToList();
-			#region dropdown items
-			List<Object> items = new List<Object>() {};
-
-			transmissionInput.DisplayMember = "Text";
-			transmissionInput.ValueMember = "Value";
-			foreach (var t in transmissions) {
-				items.Add(new { Text = t.name, Value = t.id });
-			}
-			transmissionInput.SelectedValue = items.First();
-			transmissionInput.DataSource = items;
-			items.Clear();
-			
-			branchInput.DisplayMember = "Text";
-			branchInput.ValueMember = "Value";
-			var branches = db.Branch.Select(i => new { id = i.id, name = i.City1.name }).ToList();
-			foreach (var b in branches) {
-				items.Add(new { Text = b.name, Value = b.id });
-			}
-			branchInput.SelectedValue = items.First();
-			branchInput.DataSource = items;
-			items.Clear();
-
-			fuelInput.DisplayMember = "Text";
-			fuelInput.ValueMember = "Value";
-			var fuels = db.FuelType.Select(i => new { id = i.id, name = i.name }).ToList();
-			foreach (var f in fuels) {
-				items.Add(new { Text = f.name, Value = f.id });
-			}
-			fuelInput.SelectedValue = items.First();
-			fuelInput.DataSource = items;
-			items.Clear();
-
-			bodyTypeInput.DisplayMember = "Text";
-			bodyTypeInput.ValueMember = "Value";
-			var bodyTypes = db.CarBodyType.Select(i => new { id = i.id, name = i.name }).ToList();
-			foreach (var b in bodyTypes) {
-				items.Add(new { Text = b.name, Value = b.id });
-			}
-			bodyTypeInput.SelectedValue = items.First();
-			bodyTypeInput.DataSource = items;
-
-			if (id == 0) {
+			if (d == null) {
+				fillComboboxes();
 				saveCarBtn.Hide();
 			} 
 			else {
-				this.id = id;
-				populate();
+				fillComboboxes(d.Cells[4].Value.ToString(), d.Cells[5].Value.ToString(), d.Cells[6].Value.ToString(), d.Cells[8].Value.ToString());
+				this.id = Int32.Parse(d.Cells[0].Value.ToString());
+				MessageBox.Show(d.Cells[10].Value.ToString());
+				fillInputs(d.Cells[1].Value.ToString(), d.Cells[2].Value.ToString(), d.Cells[3].Value.ToString(), d.Cells[7].Value.ToString(), d.Cells[9].Value.ToString(), d.Cells[10].Value.ToString());
 			}
-			#endregion
 		}
 
 		private void addBtn_Click(object sender, EventArgs e) {
@@ -78,55 +39,89 @@ namespace CarRental {
 			this.car.transmission_type = Int32.Parse(transmissionInput.SelectedValue.ToString());
 			this.car.branch = Int32.Parse(branchInput.SelectedValue.ToString());
 			this.car.body_type = Int32.Parse(bodyTypeInput.SelectedValue.ToString());
+			this.car.fuel_type = Int32.Parse(fuelInput.SelectedValue.ToString());
+			this.car.year = Int32.Parse(yearInput.Text);
 			db.Car.Add(this.car);
 			db.SaveChanges();
 		}
 
-		private void populate() {
-			this.car = db.Car.Where(i => i.id == this.id).Select(u => u).First();
+		private void saveCarBtn_Click(object sender, EventArgs e) {
+			this.car = db.Car.Where(c => c.id == this.id).First();
 
-			#region dropdowns
-			int transmissionIndex = 0;
-			for (int i = 0; i < transmissionInput.Items.Count; i++) {
-				if (transmissionInput.Items[i].Equals(this.car.TransmissionType.name)) {
-					transmissionIndex = i;
-				}
+			this.car.name = nameInput.Text;
+			this.car.speed = Int32.Parse(speedInput.Text);
+			this.car.price = decimal.Parse(priceInput.Text);
+			this.car.power_hp = Int32.Parse(powerInput.Text);
+			this.car.name = nameInput.Text;
+			this.car.license_number = licenseInput.Text;
+			this.car.transmission_type = Int32.Parse(transmissionInput.SelectedValue.ToString());
+			this.car.branch = Int32.Parse(branchInput.SelectedValue.ToString());
+			this.car.body_type = Int32.Parse(bodyTypeInput.SelectedValue.ToString());
+			this.car.fuel_type = Int32.Parse(fuelInput.SelectedValue.ToString());
+			this.car.year = Int32.Parse(yearInput.Text);
+
+			db.SaveChanges();
+		}
+
+		private void fillComboboxes(string Transmission="", string FuelType="", string BodyType="", string Branch="") {
+			int index = 0;
+
+			var transmissions = db.TransmissionType.Select(i => new {id = i.id, name = i.name}).ToList();
+			transmissionInput.DisplayMember = "name";
+			transmissionInput.ValueMember = "id";
+			transmissionInput.DataSource = transmissions;
+			if (!string.IsNullOrEmpty(Transmission)) {
+				index = transmissions.FindIndex(i => i.name == Transmission);
 			}
-			transmissionInput.SelectedIndex = transmissionIndex;
-
-			int fuelTypeIndex = 0;
-			for (int i = 0; i < fuelInput.Items.Count; i++) {
-				if (fuelInput.Items[i].Equals(this.car.FuelType.name)) {
-					fuelTypeIndex = i;
-				}
+			else {
+				index = 0;
 			}
-			fuelInput.SelectedIndex = fuelTypeIndex;
+			transmissionInput.SelectedIndex = index;
 
-			int bodyTypeIndex = 0;
-			for (int i = 0; i < bodyTypeInput.Items.Count; i++) {
-				if (bodyTypeInput.Items[i].Equals(this.car.CarBodyType.name)) {
-					bodyTypeIndex = i;
-				}
+			var branches = db.Branch.Select(i => new { id = i.id, name = i.City1.name }).ToList();
+			branchInput.DisplayMember = "name";
+			branchInput.ValueMember = "id";
+			branchInput.DataSource = branches;
+			if (!string.IsNullOrEmpty(Branch)) {
+				index = branches.FindIndex(i => i.name == Branch);
 			}
-			bodyTypeInput.SelectedIndex = bodyTypeIndex;
-
-			int branchIndex = 0;
-			for (int i = 0; i < branchInput.Items.Count; i++) {
-				if (branchInput.Items[i].Equals(this.car.CarBodyType.name)) {
-					bodyTypeIndex = i;
-				}
+			else {
+				index = 0;
 			}
-			#endregion
+			branchInput.SelectedIndex = index;
 
-			//bodyTypeInput.SelectedIndex = ;
-			//branchInput.SelectedIndex = ;
-			fuelInput.Text = this.car.fuel_type.ToString();
-			yearInput.Text = this.car.year.ToString();
-			powerInput.Text = this.car.power_hp.ToString();
-			speedInput.Text = this.car.speed.ToString();
-			priceInput.Text = this.car.branch.ToString();
-			priceInput.Text = this.car.price.ToString();
-			licenseInput.Text = this.car.license_number;
+			var fuels = db.FuelType.Select(i => new { id = i.id, name = i.name }).ToList();
+			fuelInput.DisplayMember = "name";
+			fuelInput.ValueMember = "id";
+			fuelInput.DataSource = fuels;
+			if (!string.IsNullOrEmpty(FuelType)) {
+				index = fuels.FindIndex(i => i.name == FuelType);
+			}
+			else {
+				index = 0;
+			}
+			fuelInput.SelectedIndex = index;
+
+			var bodyTypes = db.CarBodyType.Select(i => new { id = i.id, name = i.name }).ToList();
+			bodyTypeInput.DisplayMember = "name";
+			bodyTypeInput.ValueMember = "id";
+			bodyTypeInput.DataSource = bodyTypes;
+			if (!string.IsNullOrEmpty(BodyType)) {
+				index = bodyTypes.FindIndex(i => i.name == BodyType);
+			}
+			else {
+				index = 0;
+			}
+			bodyTypeInput.SelectedIndex = index;
+		}
+
+		private void fillInputs(string name, string year, string power, string speed, string price, string licenseNumber) {
+			nameInput.Text = name;
+			yearInput.Text = year;
+			powerInput.Text = power;
+			speedInput.Text = speed;
+			priceInput.Text = price;
+			licenseInput.Text = licenseNumber;
 		}
 	}
 }

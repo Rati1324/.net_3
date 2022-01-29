@@ -17,7 +17,7 @@ namespace CarRental {
 			InitializeComponent();
 		}
 
-		private void impotBtn_Click(object sender, EventArgs e) {
+		private void importBtn_Click(object sender, EventArgs e) {
 			CarRentalEntities db = new CarRentalEntities();
 			string selected = importSelect.Text;
 
@@ -31,9 +31,10 @@ namespace CarRental {
 					FuelType = i.FuelType.name,
 					BodyType = i.CarBodyType.name,
 					Speed = i.speed,
-					Branch = i.branch,
-					Price = i.price
-				});
+					Branch = i.Branch1.City1.name,
+					Price = i.price,
+					LicenseNumber = i.license_number
+				}); ;
 				mainGrid.DataSource = data.ToList();
 				mainGrid.Columns[0].Visible = false;
 			}
@@ -63,11 +64,11 @@ namespace CarRental {
 			userForm.Show();
 		}
 
-		private void editUserBtn_Click(object sender, EventArgs e) {
+		private void editItemBtn_Click(object sender, EventArgs e) {
 			if (importSelect.Text.Equals("Cars")) {
 				int index = mainGrid.SelectedCells[0].RowIndex;
 				int id = Int32.Parse(mainGrid.Rows[index].Cells[0].Value.ToString());
-				AddCarForm carForm = new AddCarForm(id);
+				AddCarForm carForm = new AddCarForm(mainGrid.Rows[index]);
 				carForm.Show();
 			}
 			else {

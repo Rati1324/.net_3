@@ -214,6 +214,7 @@ namespace CarRental {
 			this.saveCarBtn.TabIndex = 4;
 			this.saveCarBtn.Text = "Save";
 			this.saveCarBtn.UseVisualStyleBackColor = true;
+			this.saveCarBtn.Click += new System.EventHandler(this.saveCarBtn_Click);
 			// 
 			// licenseInput
 			// 
