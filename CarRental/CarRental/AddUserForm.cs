@@ -18,19 +18,19 @@ namespace CarRental {
 
 		public AddUserForm(int id = 0) {
 			InitializeComponent();
+			var branches = db.Branch.Select(i => new { id = i.id, name = i.City1.name }).ToList();
+			branchInput.DisplayMember = "name";
+			branchInput.ValueMember = "id";
+			branchInput.DataSource = branches;
 			if (id == 0) {
 				saveBtn.Hide();
+				branchInput.SelectedIndex = 0;
 			} 
 			else {
 				this.id = id;
+				//int index = db.Staff.findI
 				populate();
 			}
-
-			var branches = db.Branch.Select(i => i.City1.name).ToList();
-			foreach (var b in branches) {
-				branchInput.Items.Add(b);
-			}
-			branchInput.SelectedIndex = 0;
 		}
 
 		private void addBtn_Click(object sender, EventArgs e) {
@@ -43,9 +43,13 @@ namespace CarRental {
 			this.user.password = passwordInput.Text;
 			this.user.type = 2;
 			this.user.full_address = streetInput.Text;
-			// This adds the address
 			checkCityAndCountry();
 			db.User.Add(this.user);
+			db.SaveChanges();
+			Staff s = new Staff();
+			s.branch = Int32.Parse(branchInput.SelectedValue.ToString());
+			s.id = this.user.id;
+			db.Staff.Add(s);
 			db.SaveChanges();
 		}
 		
@@ -57,8 +61,8 @@ namespace CarRental {
 			this.user.email = emailInput.Text;
 			this.user.dob = dobInput.Value;
 			this.user.password = passwordInput.Text;
-			// This adds the address
 			this.user.full_address = streetInput.Text;
+			this.user.Staff.branch = Int32.Parse(branchInput.SelectedValue.ToString());
 			checkCityAndCountry();
 			db.SaveChanges();
 		}
@@ -98,12 +102,10 @@ namespace CarRental {
 			pIdInput.Text = user.personal_id;
 			emailInput.Text = user.email;
 			dobInput.Value = (DateTime)user.dob;
-			//countryInput.Text = user.Address1.Country1.name;
-			//cityInput.Text = user.Address1.City1.name;
+			countryInput.Text = user.City.Country1.name;
+			cityInput.Text = user.City.name;
 			streetInput.Text = user.full_address;
 			passwordInput.Text = user.password;
-			//this.oldCountry = user.Address1.Country1.name;
-			//this.oldCity = user.Address1.City1.name;
 		}
 
 		private void backBtn_Click(object sender, EventArgs e) {

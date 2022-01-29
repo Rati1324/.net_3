@@ -12,10 +12,18 @@ namespace CarRental {
 	public partial class HomePageForm : Form {
 		private CarRentalEntities db = new CarRentalEntities();
 		public HomePageForm(int id, string UserType) {
-			if (UserType != "Admin") {
-				addUserBtn.Hide();
-			}
 			InitializeComponent();
+			if (UserType == "Customer") {
+				addUserBtn.Hide();
+				addCarBtn.Hide();
+				editItemBtn.Hide();
+				deleteBtn.Hide();
+				importSelect.Hide();
+			}
+			else if (UserType == "Moderator") {
+				addUserBtn.Hide();
+				importSelect.Hide();
+			}
 		}
 
 		private void importBtn_Click(object sender, EventArgs e) {
@@ -47,12 +55,11 @@ namespace CarRental {
 					Phone = i.phone,
 					Password = i.password,
 					Dob = i.dob,
-					//Country = i.Address1.Country1.name,
-					//City = i.Address1.City1.name,
+					Country = i.City.Country1.name,
+					City = i.City.name,
 					Street = i.full_address
 				}).ToList();
 
-				// Need to compine additionaldata
 				mainGrid.DataSource = data;
 				mainGrid.Columns[0].Visible = false;
 			}
@@ -94,10 +101,18 @@ namespace CarRental {
 				int index = mainGrid.SelectedCells[0].RowIndex;
 				int id = Int32.Parse(mainGrid.Rows[index].Cells[0].Value.ToString());
 				User c = db.User.Where(i => i.id == id).First();
+				Staff s = db.Staff.Where(i => i.id == id).First();
+				db.Staff.Remove(s);
 				db.User.Remove(c);
 			}
 			db.SaveChanges();
 			importBtn.PerformClick();
+		}
+
+		private void logoutBtn_Click(object sender, EventArgs e) {
+			this.Hide();
+			MainForm mf = new MainForm();
+			mf.Show();
 		}
 	}
 }

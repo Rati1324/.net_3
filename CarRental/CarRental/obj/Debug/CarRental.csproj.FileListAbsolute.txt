@@ -13,14 +13,13 @@ C:\Users\rati\Documents\programming\.Net\CarRental\CarRental\obj\Debug\CarRental
 C:\Users\rati\Documents\programming\.Net\CarRental\CarRental\obj\Debug\CarRental.pdb
 C:\Users\rati\Documents\programming\.Net\CarRental\CarRental\obj\Debug\CarRental.LoginForm.resources
 C:\Users\rati\Documents\programming\.Net\CarRental\CarRental\obj\Debug\CarRental.HomePageForm.resources
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.csproj.AssemblyReference.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.AddCarForm.resources
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.AddUserForm.resources
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.HomePageForm.resources
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.LoginForm.resources
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.Properties.Resources.resources
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.MainForm.resources
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.csproj.GenerateResource.cache
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.csproj.CoreCompileInputs.cache
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.exe
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.pdb
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\CarRental.exe.config
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\CarRental.exe
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\CarRental.pdb
@@ -28,6 +27,6 @@ C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\En
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\EntityFramework.xml
 C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.AddUserForm.resources
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.AddCarForm.resources
-C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.RegisterForm.resources
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.csproj.AssemblyReference.cache
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.exe
+C:\Users\rati\Documents\programming\.Net\.net_3\CarRental\CarRental\obj\Debug\CarRental.pdb

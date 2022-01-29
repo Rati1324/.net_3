@@ -24,6 +24,7 @@ namespace CarRental {
 			else {
 				fillComboboxes(d.Cells[4].Value.ToString(), d.Cells[5].Value.ToString(), d.Cells[6].Value.ToString(), d.Cells[8].Value.ToString());
 				this.id = Int32.Parse(d.Cells[0].Value.ToString());
+
 				fillInputs(d.Cells[1].Value.ToString(), d.Cells[2].Value.ToString(), d.Cells[3].Value.ToString(), d.Cells[7].Value.ToString(), d.Cells[9].Value.ToString(), d.Cells[10].Value.ToString());
 			}
 		}
